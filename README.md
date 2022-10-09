@@ -1,4 +1,4 @@
-# 💡 PBP F-07 Web 💡
+# 🍃 E-Waste Bank 🍃
 > Proyek ini dibuat untuk memenuhi tugas Proyek Tengah Semester (PTS)
 > pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang
 > diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
@@ -18,6 +18,7 @@ Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.he
 **TODO**
 
 ## 👥 Daftar modul yang akan diimplementasikan 👥
+Berikut ini adalah daftar modul yang akan diimplementasikan.
 - Admin
 - Halaman utama
 - Request penjemputan
@@ -28,7 +29,20 @@ Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.he
   - Admin
 
 ## 👩🏻‍💻 Role atau peran pengguna beserta deskripsinya 👩🏻‍💻
+### 👤 Admin 👤
+Admin dapat:
 **TODO**
+
+### 🔒 User Yang Tidak Login 🔒
+User yang tidak login dapat:
+
+**TODO**
+
+### 🔑 User Yang Sudah Login 🔑
+User yang sudah login dapat:
+
+**TODO**
+
 
 ## Credits
 
