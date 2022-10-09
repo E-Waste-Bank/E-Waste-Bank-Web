@@ -12,13 +12,20 @@
 - [Riona Adani Ghaisani](https://github.com/rionadani) (2106750995)
 
 ## 🌏 Tautan Aplikasi Heroku 🌏
-**TODO**
+Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.herokuapp.com/).
 
 ## 📃 Cerita aplikasi yang diajukan serta manfaatnya 📃
 **TODO**
 
 ## 👥 Daftar modul yang akan diimplementasikan 👥
-**TODO**
+- Admin
+- Halaman utama
+- Request penjemputan
+  - User
+  - Admin
+- Manage keuangan
+  - User
+  - Admin
 
 ## 👩🏻‍💻 Role atau peran pengguna beserta deskripsinya 👩🏻‍💻
 **TODO**
