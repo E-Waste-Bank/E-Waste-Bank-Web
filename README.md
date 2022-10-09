@@ -1,4 +1,4 @@
-# Template Proyek Django PBP
+# PBP F-07 Web
 
 ## Nama-Nama Anggota Kelompok
 - Hugo Sulaiman Setiawan (2106707315)
