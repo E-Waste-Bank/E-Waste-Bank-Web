@@ -1,4 +1,4 @@
-# 💡 PBP F-07 Web 💡
+# 🍃 E-Waste Bank 🍃
 > Proyek ini dibuat untuk memenuhi tugas Proyek Tengah Semester (PTS)
 > pada mata kuliah Pemrograman Berbasis Platform (CSGE602022) yang
 > diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
