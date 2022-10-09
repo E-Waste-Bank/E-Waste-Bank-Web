@@ -4,7 +4,7 @@
 > diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
 > pada Semester Gasal, Tahun Ajaran 2022/2023.
 
-## 👩🏻‍💻 Nama-Nama Anggota Kelompok 🧑🏻‍💻
+## 👩🏻‍💻 Pengembang Aplikasi 🧑🏻‍💻
 - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan) (2106707315)
 - [Hayfa Najma](https://github.com/HayfaNajma07) (2106653754)
 - [Ibni Shaquille Syauqi Ibrahim](https://github.com/IbniShaquille) (2106706735)
@@ -17,20 +17,21 @@ Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.he
 ## 📃 Cerita aplikasi yang diajukan serta manfaatnya 📃
 **TODO**
 
-## 👥 Daftar modul yang akan diimplementasikan 👥
-Berikut ini adalah daftar modul yang akan diimplementasikan.
-- Admin
-- Halaman utama
-- Request penjemputan
-  - User
-  - Admin
-- Manage keuangan
-  - User
-  - Admin
+## 👥 Daftar Modul 👥
+Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang dari setiap modul.
+- Admin - [Riona Adani Ghaisani](https://github.com/rionadani)
+- Halaman Utama - Semua Anggota
+- Request Penjemputan
+  - User - [Ibni Shaquille Syauqi Ibrahim](https://github.com/IbniShaquille)
+  - Admin - [Hayfa Najma](https://github.com/HayfaNajma07)
+- Manage Keuangan
+  - User - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan)
+  - Admin - [Raditya Aditama](https://github.com/ratama98)
 
-## 👩🏻‍💻 Role atau peran pengguna beserta deskripsinya 👩🏻‍💻
+## 👩🏻‍💻 Persona 👩🏻‍💻
 ### 👤 Admin 👤
 Admin dapat:
+
 **TODO**
 
 ### 🔒 User Yang Tidak Login 🔒
