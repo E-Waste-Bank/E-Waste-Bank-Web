@@ -4,6 +4,8 @@
 > diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
 > pada Semester Gasal, Tahun Ajaran 2022/2023.
 
+![Main Deployment Status](https://github.com/E-Waste-Bank/E-Waste-Bank-Web/actions/workflows/dpl.yml/badge.svg?branch=main)
+
 ## 👩🏻‍💻 Pengembang Aplikasi 🧑🏻‍💻
 - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan) (2106707315)
 - [Hayfa Najma](https://github.com/HayfaNajma07) (2106653754)
