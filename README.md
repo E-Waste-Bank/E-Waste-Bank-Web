@@ -35,8 +35,8 @@ Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang d
 ## 👩🏻‍💻 Persona 👩🏻‍💻
 ### 👤 Admin 👤
 Admin dapat:
-
-**TODO**
+- Memiliki akses ke halman utama dan semua modul
+- Memiliki akses untuk mengedit dan menambahkan informasi mengenai e-waste
 
 ### 🔒 User Yang Tidak Login 🔒
 User yang tidak login dapat:
@@ -48,6 +48,3 @@ User yang sudah login dapat:
 - Memiliki akses ke halaman utama.
 - Memiliki akses untuk semua fitur yang ada pada aplikasi E-Waste Bank.
 
-## Credits
-
-Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
