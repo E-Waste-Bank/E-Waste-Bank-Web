@@ -17,7 +17,7 @@
 Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.herokuapp.com/).
 
 ## 📃 Cerita aplikasi yang diajukan serta manfaatnya 📃
-**TODO**
+Sampah elektronik (*e-waste*) merupakan salah satu efek samping dari Transformasi Digital yang terjadi pada masa kini. Menurut data dari [Global E-Waste Monitor](https://ewastemonitor.info/), terdapat 53 juta ton sampah elektronik yang dihasilkan oleh seluruh negara di dunia pada tahun 2020. Estimasi yang dilakukan oleh badan yang sama juga menyajikan kesimpulan bahwa laju pertumbuhan sampah elektronik akan terus berkembang, bahkan dalam waktu sekitar 8 tahun, yaitu pada tahun 2030, diperkirakan bahwa akan ada 120 juta ton sampah elektronik yang dihasilkan oleh manusia! Jika situasi ini terus berlanjut, dampaknya akan sangat besar, baik bagi manusia, flora, dan fauna. 
 
 ## 👥 Daftar Modul 👥
 Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang dari setiap modul.
