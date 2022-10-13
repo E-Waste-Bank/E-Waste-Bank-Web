@@ -43,9 +43,8 @@ User yang tidak login dapat:
 
 ### 🔑 User Yang Sudah Login 🔑
 User yang sudah login dapat:
-
-**TODO**
-
+- Memiliki akses ke halaman utama.
+- Memiliki akses untuk semua fitur yang ada pada aplikasi E-Waste Bank.
 
 ## Credits
 
