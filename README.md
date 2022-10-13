@@ -17,7 +17,9 @@
 Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.herokuapp.com/).
 
 ## 📃 Cerita aplikasi yang diajukan serta manfaatnya 📃
-**TODO**
+Gaya hidup yang serba digital seperti saat ini, membuat kita sangat bergantung dengan berbagai barang elektronik. Kita menjadi sering membeli gadget versi terbaru agar lebih up to date. Namun, hal ini juga membuat kita seringkali membuang gadget yang masih layak pakai. Hal ini tentu sangat tidak baik bagi lingkungan. Oleh karena itu, kami membuat aplikasi yang bernama E-Waste Bank. Aplikasi ini bertujuan untuk memudahkan masyarakat untuk mengumpulkan dan mengelola barang elektronik yang sudah tidak layak pakai. 
+
+Aplikasi ini dapat digunakan oleh masyarakat untuk mendapatkan uang melalui menjual barang elektronik yang sudah tidak layak pakai. Aplikasi ini juga dapat melakukan penjemputan barang elektronik bekas ke lokasi yang ditentukan oleh pengguna. selain itu, pengguna juga mendapatkan edukasi melalui aplikasi ini dengan diadakannya jenis-jenis E-Waste yang ada dan cara mengelola E-Waste yang benar.
 
 ## 👥 Daftar Modul 👥
 Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang dari setiap modul.
