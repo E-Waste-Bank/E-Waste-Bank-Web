@@ -1,10 +1,6 @@
 name: Test
 
 on:
-  pull_request:
-    # test before merge to main
-    branches:
-      - main
   push:
     # testing for main is done on PR
     branches-ignore:
@@ -15,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Python 3.10.6
+    - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.10.6
+        cache: 'pip'
+        python-version-file: '.python-version'
     - name: Install needed packages
       run: |
         pip install -r requirements.txt
@@ -27,9 +24,18 @@ jobs:
       run: python manage.py collectstatic --no-input
     - name: Run unit tests
       run: |
-        coverage run --parallel --omit="manage.py" manage.py test
+        coverage run --omit="manage.py" manage.py test
     - name: Upload coverage
       uses: actions/upload-artifact@v2
       with:
         name: unittest-coverage
         path: .coverage*
+    - name: Generage coverage report
+      run: |
+        coverage report -m
+        coverage html
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: unittest-coverage-html
+        path: htmlcov/
