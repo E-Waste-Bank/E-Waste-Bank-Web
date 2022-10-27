@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'home',
     'keuangan',
     'penjemputan',
-    'admin',
 ]
 
 MIDDLEWARE = [
