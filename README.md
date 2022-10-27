@@ -27,9 +27,8 @@ Aplikasi ini dapat digunakan oleh masyarakat untuk mendapatkan uang melalui menj
 Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang dari setiap modul.
 - Admin - [Riona Adani Ghaisani](https://github.com/rionadani)
 - Halaman Utama - Semua Anggota
-- Request Penjemputan
-  - User - [Ibni Shaquille Syauqi Ibrahim](https://github.com/IbniShaquille)
-  - Admin - [Hayfa Najma](https://github.com/HayfaNajma07)
+- Request Penjemputan - [Ibni Shaquille Syauqi Ibrahim](https://github.com/IbniShaquille)
+- Tips and Tricks - [Hayfa Najma](https://github.com/HayfaNajma07)
 - Manage Keuangan
   - User - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan)
   - Admin - [Raditya Aditama](https://github.com/ratama98)
@@ -37,7 +36,7 @@ Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang d
 ## 👩🏻‍💻 Persona 👩🏻‍💻
 ### 👤 Admin 👤
 Admin dapat:
-- Memiliki akses ke halman utama dan semua modul
+- Memiliki akses ke halaman utama dan semua modul
 - Memiliki akses untuk mengedit dan menambahkan informasi mengenai e-waste
 
 ### 🔒 User Yang Tidak Login 🔒
