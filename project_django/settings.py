@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home',
     'keuangan',
     'penjemputan',
+    'ewaste_admin'
 ]
 
 MIDDLEWARE = [
