@@ -21,7 +21,8 @@
           <div class="card-banner">
             <div class="container">
               <div class="row">
-                {%csrf_token%}
+
+                {% csrf_token %}
                 <!-- Title input -->
                 <div class="form-outline mb-4 mt-5" id="title">
                   <div class="input-group input-group-dynamic">
@@ -121,4 +122,5 @@
   }
 
 </style>
+<script src="{% static 'js/addTask.js' %}"></script>
 {% endblock content %}

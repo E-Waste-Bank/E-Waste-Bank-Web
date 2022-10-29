@@ -1,12 +1,20 @@
 // Add Task
+function redir() {
+    console.log("redir");
+    window.location.replace("/tips-and-tricks");
+}
+
 $(document).ready(function() {
-    $("#submitBtn").on('click', function() {
+    $("#detailAdd").submit(function(e) {
+        e.preventDefault(); 
+
         $.ajax({
             url: "/tips-and-tricks/add",
             type: 'POST',
-            dataType:"json",
-            success: function(data) {
-                window.location.href = "/tips-and-tricks/";
+            data: $(this).serialize(),
+            success: function(response) {
+                console.log("ajax?");
+                redir();
             }
         });
     });

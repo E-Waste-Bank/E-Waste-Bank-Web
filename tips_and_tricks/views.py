@@ -38,7 +38,7 @@ def add(request):
     form = AddForm(request.POST)
     if form.is_valid():
         form.save()
-        return HttpResponse("/tips-and-tricks")
+        return HttpResponse("")
 
     # form = AddForm()
     # if request.method == "POST":
