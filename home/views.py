@@ -30,3 +30,15 @@ def logout_user(request):
     logout(request)
     return redirect('home:login')
 
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Akun telah berhasil dibuat!')
+            return redirect('home:login')
+    
+    context = {'form':form}
+    return render(request, 'register.html', context)
