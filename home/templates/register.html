@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Registrasi Akun</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
+  
+  <h1>Formulir Registrasi</h1>  
+
+    <form method="POST" >  
+        {% csrf_token %}  
+        <section class="vh-100">
+          <table>  
+            {{ form.as_table }}  
+            <tr>  
+                <td></td>
+                <td><input type="submit" name="submit" value="Daftar"/></td>  
+            </tr>  
+          </table> 
+        </section>
+    </form>
+
+  {% if messages %}  
+      <ul>   
+          {% for message in messages %}  
+              <li>{{ message }}</li>  
+              {% endfor %}  
+      </ul>   
+  {% endif %}
+
+</div>  
+
+<style>
+  body {
+      background-color: bisque;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      display: flex;
+      color: black;
+      font-size: 20px;
+  }  
+  .login {
+      margin: auto;
+  }
+  h1 {
+      text-align: center;
+      margin-bottom: 50px;
+      margin-top: 50px;
+      font-size: 40px;
+  }
+</style>
+
+{% endblock content %}
