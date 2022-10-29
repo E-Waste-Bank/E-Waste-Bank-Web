@@ -1,0 +1,39 @@
+{% load static %}
+{% block content %}
+<footer class="d-flex flex-wrap justify-content-between align-items-center mt-5 py-4 px-5 border-top" id="footer">
+  <div>
+    <a href="#" class="d-flex align-items-center text-muted text-decoration-none">
+      <img width="56" height="56" src="https://cdn-icons-png.flaticon.com/512/1039/1039783.png" />
+      <h6 class="ms-3 text-dark" style="font-weight: bold;">&copy; 2022 E-Waste Bank</h6>
+    </a>
+  </div>
+
+  <ul class="nav list-unstyled d-flex justify-content-end">
+    <li class="nav-item d-flex align-items-center">
+      <a class="nav-link" href="#"> About Us </a>
+    </li>
+
+    <li class="nav-item d-flex align-items-center">
+      <a class="nav-link" href="https://github.com/E-Waste-Bank/E-Waste-Bank-Web" target="_blank">
+        <i class="fab fa-github opacity-8 fa-2x"></i>
+      </a>
+    </li>
+  </ul>
+</footer>
+
+<style>
+    footer{
+        background-color: #7fbcd8;
+    }
+    .nav-link{
+        color: black;
+        font-weight: bolder;
+        font-size: 20px;
+    }
+    h6{
+        font-size: 20px;
+    }
+</style>
+{% endblock content %}
+
+  
