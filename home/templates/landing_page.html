@@ -15,18 +15,21 @@
   
               <h3 class="mb-5">Sign in</h3>
   
-              <div class="form-outline mb-4">
-                <input type="username" id="typeEmailX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX-2">Username</label>
-              </div>
-  
-              <div class="form-outline mb-4">
-                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                <label class="form-label" for="typePasswordX-2">Password</label>
-              </div>
-  
-              <button class="submit" type="text">LOGIN</button>
-              <button class="submit" type="text">LOGOUT</button>
+              <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-outline mb-4">
+                  <input type="username" id="typeEmailX-2" class="form-control form-control-lg" />
+                  <label class="form-label" for="typeEmailX-2">Username</label>
+                </div>
+    
+                <div class="form-outline mb-4">
+                  <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                  <label class="form-label" for="typePasswordX-2">Password</label>
+                </div>
+    
+                <button class="submit" type="text">LOGIN</button>
+                <button class="submit" type="text">LOGOUT</button>
+              </form>    
               <p class="mb-0">Don't have an account? <a href="#" class="text-black fw-bold">Sign Up</a>
   
               <hr class="my-4">
