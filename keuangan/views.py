@@ -74,8 +74,32 @@ def user_create_cashout(request: HttpRequest):
         # hanya boleh POST ke endpoint ini
         return JsonResponse({"status": "Invalid method"}, status=405)
 
-    context = {
-        'data_keuangan': data_keuangan,
-    }
+# ! INITIAL NOT DONE !
+@login_required(login_url="/login/")
+def user_get_cashout_html(request: HttpRequest, id: int):
+    if Cashout.objects.filter(pk = id).exists():
+        cashout_object = Cashout.objects.get(pk = id)
+        # validasi user adlh admin ATAU user pemilik cashout
+        authorized = False
 
-    return render(request, "user.html", context)
+        if request.user.groups.exists():
+            groups = request.user.groups.all()
+
+            for group in groups:
+                if group.name == "admin":
+                    authorized = True
+
+        if request.user == cashout_object.user:
+            authorized = True
+
+        context = {
+            "cashout_object": cashout_object
+        }
+        if authorized:
+            return render(request, "cashout.html", context)
+        
+        else:
+            return HttpResponse(status=403)
+
+    # jika obj cashout dgn id tsb tdk ditemukan
+    return HttpResponse(status=404)
