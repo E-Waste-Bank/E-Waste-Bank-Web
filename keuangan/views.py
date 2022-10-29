@@ -6,7 +6,7 @@ from django.core import serializers
 
 # Create your views here.
 def show_admin(request):
-    keuangan_admin = KeuanganAdmin.objects.all().order_by()
+    keuangan_admin = KeuanganAdmin.objects.all()
 
     context = {
         'keuangan_admin': keuangan_admin,
