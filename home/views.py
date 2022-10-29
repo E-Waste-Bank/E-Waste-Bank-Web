@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.urls import reverse
+from keuangan.models import KeuanganAdmin
 
 # Create your views here.
 def landing_page(request):
