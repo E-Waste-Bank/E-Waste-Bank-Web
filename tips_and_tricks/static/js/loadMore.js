@@ -19,7 +19,7 @@
                                         <div class="position-relative">
                                         <img
                                             class="rounded w-100"
-                                            height="300"
+                                            height="310"
                                             src= ${data.fields.image_url}
                                         >
                                         </div>
@@ -44,7 +44,7 @@
                                                 </div>
                                             </div>
 
-                                            <p class="text-dark mt-3"> ${data.fields.brief_description}</p>
+                                            <p class="text-dark mt-3" id="briefDescription> ${data.fields.brief_description}</p>
 
                                             <a class="btn btn-warning btn-md"
                                                 id="button-readmore"

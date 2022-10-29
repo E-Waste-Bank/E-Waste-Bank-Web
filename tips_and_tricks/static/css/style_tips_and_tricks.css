@@ -125,6 +125,7 @@
   font-weight: bolder;
   color: black;
   font-size: 36px;
+  justify-content: center
 }
 
 /* Style tanggal */
@@ -168,5 +169,5 @@
 
 #button-readmore{
   font-weight: bolder;
-  margin-top: 5px
+  margin-bottom: 10px
 }
