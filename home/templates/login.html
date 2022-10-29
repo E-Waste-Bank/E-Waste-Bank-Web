@@ -1,43 +1,70 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>Landing Page</title>
+<title>Login</title>
 {% endblock meta %}
 
 {% block content %}
 
-<section class="vh-100" style="background-color: #508bfc;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div class="card shadow-2-strong" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
-              <h3 class="mb-5">Sign in</h3>
-  
-              <form action="" method="post">
-                {% csrf_token %}
-                <div class="form-outline mb-4">
-                  <input type="username" id="typeEmailX-2" class="form-control form-control-lg" />
-                  <label class="form-label" for="typeEmailX-2">Username</label>
-                </div>
-    
-                <div class="form-outline mb-4">
-                  <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                  <label class="form-label" for="typePasswordX-2">Password</label>
-                </div>
-    
-                <button class="submit" type="text">LOGIN</button>
-              </form>    
-              <p class="mb-0">Don't have an account? <a href="#" class="text-black fw-bold">Sign Up</a>
-  
-              <hr class="my-4">
-  
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
 
+<body>
+    <div class = "login";>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+                                <h2 class="mb-3">Login</h2>
+                                <h3 class="mb-5 text-black">Enter your username and password!</h3>
+                                
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="typeUsernameX">Username</label>
+                                    <input type="text" name="username" placeholder="Username" id="typeUsernameX" class="form-control" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="typePasswordX">Password</label>
+                                    <input type="password" name="password" placeholder="Password" id="typePasswordX" class="form-control" />
+                                </div>
+
+                                {% if messages %}
+                                <ul>
+                                    {% for message in messages %}
+                                        <li>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+
+                                <button class="submit" type="text">LOGIN</button>
+                                <hr class="my-4">
+                                <p class="mb-0">Don't have an account? <a href="{% url 'home:register' %}" class="text-black fw-bold">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</body>
+
+
+<style>
+    body {
+        background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/fs/d3450c65528257.5af7785ce36d8.gif);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 {% endblock content %}
