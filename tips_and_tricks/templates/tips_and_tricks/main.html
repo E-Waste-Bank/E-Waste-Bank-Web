@@ -36,7 +36,7 @@
 
 {% block content %}
 {% include 'tips_and_tricks/carousel.html' %}
-<body>
+<body id="tips_and_tricks">
   <!-- New Article Button -->
   {% if user.groups.all.0.name == 'admin'%}
   <div class="text-center mt-4">
