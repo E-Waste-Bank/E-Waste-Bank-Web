@@ -16,7 +16,7 @@ def show_keuangan(request: HttpRequest):
             if group.name == "admin":
                 return HttpResponseRedirect(reverse("keuangan:show_admin"))
 
-        return HttpResponseRedirect(reverse("keuangan:show_user"))
+    return HttpResponseRedirect(reverse("keuangan:show_user"))
 
 def show_admin(request):
     keuangan_admin = KeuanganAdmin.objects.all()
