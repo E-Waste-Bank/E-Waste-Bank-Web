@@ -57,3 +57,41 @@ class KeuanganUserViewsTest(TestCase):
     def test_keuangan_user_create_cashout_response_200(self):
         response = self.client.post("/keuangan/user/create-cashout/", {'amount': '10000'})
         self.assertEqual(response.status_code, 200)
+
+    def test_keuangan_user_cashout_html_response_403_200(self):
+        cashout_obj = Cashout.objects.create(user=self.user, uang_model=self.keuangan_data, amount=10000)
+        cashout_obj.save()
+
+        response_200 = self.client.get(f"/keuangan/cashout/{cashout_obj.pk}/")
+        self.assertEqual(response_200.status_code, 200)
+
+        # ga boleh diakses sm user lain hrsnya
+        response_403 = self.client_b.get(f"/keuangan/cashout/{cashout_obj.pk}/")
+        self.assertEqual(response_403.status_code, 403)
+
+    def test_keuangan_user_cashout_html_response_404(self):
+        response = self.client.get(f"/keuangan/cashout/118181818181/")
+        self.assertEqual(response.status_code, 404)
+
+class CashoutModelsTest(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username="t3st_us3r", password='us3r_t3st', email='test@user.xyz')
+        self.user.save()
+
+        self.client = Client()
+        self.client.login(username="t3st_us3r", password='us3r_t3st')
+
+        self.keuangan_data = KeuanganAdmin.objects.create(user=self.user, uang_user=1003074.24)
+
+    def test_cashout_model_creation(self):
+        cashout_model = Cashout(
+            user=self.user, 
+            uang_model=self.keuangan_data, 
+            amount=0.10, 
+            approved=False, 
+            disbursed=False
+        )
+
+    def tearDown(self):
+        self.client.logout()
+        self.user.delete()
