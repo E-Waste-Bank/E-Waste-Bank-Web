@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Temenin Isoman</title>
+
+<header>
+  <link
+  rel="stylesheet"
+  href="{% static 'css/style_tips_and_tricks.css' %}"
+  />
+
+  <!-- JQuery scripts -->
+  <script
+    type="text/javascript"
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  ></script>
+
+  <script
+  type="text/javascript"
+  src="{% static '/js/addTask.js' %}"
+  ></script>
+
+  <script
+    type="text/javascript"
+    src="{% static '/js/search.js' %}"
+  ></script>
+
+  <script
+    type="text/javascript"
+    src="{% static '/js/loadMore.js' %}"
+  ></script>
+</header>
+{% endblock meta %}
+
+
+{% block content %}
+{% include 'tips_and_tricks/carousel.html' %}
+<body>
+  <!-- New Article Button -->
+  {% if user.groups.all.0.name == 'admin'%}
+  <div class="text-center mt-4">
+    <a class="btn btn-warning btn-lg" 
+      id="add-button" href="{% url 'add_tips' %}">
+      <h4 class="text-dark">
+      ➕ Add New Article
+      </h4>
+    </a>
+  </div>
+  {% endif %}
+  <!-- End New Article Button -->
+
+  <div class="container post-wrapper mt-3">
+    <!-- Search Button -->
+    <div class="col d-flex justify-content-center">
+      <div class="input-group justify-content-center">
+        <form class="mx-3">
+          <div class="input-group">
+            <input id="user-input" type="search" 
+            id="user-input" class="form-control"
+            placeholder="Search" />
+  
+            <button type="button" class="btn btn-dark m-2" id="searchBtn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Search Button-->
+
+    <!-- List of Articles -->
+    <div id="replaceable-content">
+      {% include 'tips_and_tricks/load_article.html' %}
+    </div>
+    <!-- End List of Articles -->
+  </div>
+
+  <!-- Load More Button -->
+  {% if all_articles|length > 3 %}
+  <div class="text-center mt-5">
+    <button
+      type="button"
+      class="btn btn-warning btn-lg"
+      id="loadmoreBtn"
+      style="margin-bottom: 40px; font-weight: bold;">
+      Load More
+    </button>
+  </div>
+  {% endif %}
+  <!-- End Load More Button -->
+
+</body>
+
+<style>
+  body{
+    background-color: rgb(22, 98, 149);
+  }
+</style>
+{% endblock content %}
