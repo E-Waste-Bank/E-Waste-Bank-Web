@@ -1,0 +1,55 @@
+{% if articles %}
+  {% for attribute in articles %}
+  <div class="card p-3 mt-4 post-box" id="article-list">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="position-relative">
+          <img
+            class="rounded w-100"
+            height="310"
+            src={{ attribute.image_url }}
+          >
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="mt-2">
+          <div class="d-flex justify-content-between align-items-center" id="title">
+            <h3 class="mb-1">{{ attribute.title }}</h3>
+          </div>
+
+          <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+            <div class="d-flex flex-row align-items-center" id="calendar"> 
+              <i class="fa fa-calendar"></i>
+              <h5 class="ms-1 views">{{ attribute.published_date }}</h5>
+              <h4 class="ms-1 views">|</h4>
+            </div>
+            
+            <div class="d-flex flex-row align-items-center ms-2" id="source"> 
+              <i class="fa fa-user"></i> 
+              <h5 class="ms-1 views">{{ attribute.source }}</h5> 
+            </div>
+          </div>
+
+          <p class="text-dark mt-3" id="briefDescription">{{ attribute.brief_description }}</p>
+
+          <a class="btn btn-warning btn-md"
+            id="button-readmore"
+            target="_blank"
+            href="{{ attribute.article_url }}"
+            class="align-self-end btn btn-sm btn-block btn-dark"
+            >Read More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+{% else %}
+<div class="text-center mt-6">
+  <p class="lead">No Article Available</p>
+</div>
+{% endif %}
+
+

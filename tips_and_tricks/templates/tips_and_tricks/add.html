@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>E-WASTE BANK</title>
+{% endblock meta %}
+
+{% block content %}
+<section class="vh-250">
+  <div class="container-fluid h-custom">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-10 col-lg-6 col-xl-6">
+        <h1 class="text-center" id="text1">E-Waste Bank</h1>
+        <Center><h1 id="text2">Add Tips & Tricks Article</h1></Center>
+        <img src="https://nathanielstern.com/newsite/wp-content/uploads/2020/05/IMG_9156-960x540.jpg"
+          class="img-fluid" alt="Sample image">
+      </div>
+      
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form role="form" id="detailAdd" method="POST" autocomplete="off">
+          <div class="card-banner">
+            <div class="container">
+              <div class="row">
+
+                {% csrf_token %}
+                <!-- Title input -->
+                <div class="form-outline mb-4 mt-5" id="title">
+                  <div class="input-group input-group-dynamic">
+                    <label class="form-label">Title</label> 
+                  </div>
+                  {{ form.title }}
+                </div>
+  
+                <!-- Password input -->
+                <div class="form-outline mb-3" id="source">
+                  <div class="input-group input-group-dynamic">
+                    <label class="form-label">Article Source/Author</label>
+                  </div>
+                  {{ form.source }}
+                </div>
+  
+                <div class="form-outline mb-3" id="pubDate">
+                  <div class="input-group input-group-static mb-4">
+                    <label>Article Published Date</label>
+                  </div>
+                  {{ form.published_date }}
+                </div>
+  
+                <div class="form-outline mb-3" id="imageURL">
+                  <div class="input-group input-group-dynamic">
+                    <label class="form-label">Image URL</label>
+                  </div>
+                  {{ form.image_url  }}
+                </div>
+  
+                <div class="form-outline mb-3" id="articleURL">
+                  <div class="input-group input-group-dynamic">
+                    <label class="form-label">Article URL</label>
+                  </div>
+                  {{ form.article_url  }}
+                </div>
+  
+                <div class="form-outline mb-3" id="briefDesc">
+                  <div class="input-group mb-4 input-group-static">
+                    <label>Article Brief Description</label>
+                  </div>
+                  {{ form.brief_description }}
+                </div>
+  
+                <div class="text-center text-lg-start mt-4">
+                  <Center>
+                    <button type="submit" class="btn btn-warning btn-lg" id="submitBtn" 
+                      style="padding-left: 2.5rem; padding-right: 2.5rem; font-weight: bold">
+                      Submit</button>
+                  </Center>
+
+                  <Center>
+                    <p class="small fw-bold mt-2 pt-1 mb-0" 
+                      style="font-size: 20px; padding-bottom: 40px;">
+                      Do you want to go back to a previous page? <a href="/tips-and-tricks" class="link-danger">
+                      Back</a></p>
+                  </Center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vh-250{
+    background-color: rgb(99, 170, 186);
+  }
+  .h-custom {
+    height: calc(100% - 73px);
+  }
+  @media (max-width: 450px) {
+    .h-custom {
+      height: 100%;
+    }
+  }
+  .container{
+    font-weight: bold;
+    font-size: 20px
+  }
+  #text1{
+    font-size: 30px; 
+    font-family: Helvetica;
+    font-weight: bold; 
+    margin-top: 20px;
+    color: black;
+  }
+  #text2{
+    font-size: 50px; 
+    font-family: Helvetica;
+    font-weight: bolder; 
+    margin-top: 10px; 
+    margin-bottom: 30px;
+  }
+
+</style>
+<script src="{% static 'js/addTask.js' %}"></script>
+{% endblock content %}

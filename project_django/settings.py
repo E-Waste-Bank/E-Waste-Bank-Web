@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'home',
     'keuangan',
     'penjemputan',
-    'ewaste_admin'
+    'ewaste_admin',
+    'tips_and_tricks'
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Make sure the directories exist to prevent errors when doing `collectstatic`.
+for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
+    directory.mkdir(exist_ok=True)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
