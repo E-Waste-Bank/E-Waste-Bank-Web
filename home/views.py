@@ -33,7 +33,12 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            new_keuangan = KeuanganAdmin.objects.create(
+                user=new_user,
+                uang_user=0
+            )
+            new_keuangan.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect(reverse('home:login_user'))
     
