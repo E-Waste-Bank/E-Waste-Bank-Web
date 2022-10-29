@@ -11,5 +11,5 @@ class Cashout(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE) # user yang hendak ditarik uangnya
     uang_model = models.ForeignKey(KeuanganAdmin, on_delete=models.CASCADE) # refer to uang model
     amount = models.FloatField() # jumlah uang yang hendak ditarik
-    approved = models.BooleanField() # status approval dari cashout
-    disbursed = models.BooleanField() # jika uang sudah diterima user, status disbursed akan True
+    approved = models.BooleanField(default=False) # status approval dari cashout
+    disbursed = models.BooleanField(default=False) # jika uang sudah diterima user, status disbursed akan True
