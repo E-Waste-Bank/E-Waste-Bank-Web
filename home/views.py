@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.urls import reverse
 
 # Create your views here.
 def landing_page(request):
@@ -24,7 +25,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('home:login')
+    return redirect(reverse('home:login'))
 
 def register(request):
     form = UserCreationForm()
@@ -34,7 +35,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
-            return redirect('home:login')
+            return redirect(reverse('home:login_user'))
     
     context = {'form':form}
     return render(request, 'register.html', context)
