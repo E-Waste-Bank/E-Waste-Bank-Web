@@ -1,9 +1,10 @@
 
 async function get_json_cashout() {
-    return fetch("keuangan/json/admin-cashout").then((res) => res.json())
+    return fetch('/keuangan/json/admin_cashout').then((res) => res.json())
 }
 
-async function refresh_table() {
+// 
+async function refresh_table_cashout() {
     document.getElementById("table").innerHTML = ""
     const data = await get_json_cashout()
     let htmlString = ``
@@ -14,13 +15,15 @@ async function refresh_table() {
             <td>Tidak ada request penarikan</td>
         </tr>
         `
+        console.log("No data")
     } else {
+        console.log("Success")
         htmlString += `
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Tombol</th>
                 <th scope="col">Handle</th>
             </tr>
         </thead>
@@ -31,7 +34,7 @@ async function refresh_table() {
         data.forEach((item) => {
             htmlString += `
             <tr>
-                <th scope="row">${item.fields.user}</th>
+                <th scope="row">${item.pk}</th>
                 <td>${item.fields.user}</td>
                 <td>${item.fields.user}</td>
                 <td>${item.fields.user}</td>
@@ -44,5 +47,5 @@ async function refresh_table() {
     document.getElementById("table").innerHTML = htmlString
 }
 
-document.getElementById("refresh").onclick = refresh_table
-refresh_table()
+document.getElementById("cashout").onclick = refresh_table_cashout
+refresh_table_cashout()

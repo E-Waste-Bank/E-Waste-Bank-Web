@@ -42,7 +42,7 @@ def admin_get_keuangan_data_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/")
-def admin_get_all_cashouts_json(request: HttpRequest): # TODO test
+def admin_get_all_cashouts_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/") # TODO set login URL, create tests
