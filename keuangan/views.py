@@ -8,7 +8,7 @@ from django.core import serializers
 from .forms import *
 
 # Create your views here.
-@login_required
+@login_required(login_url="/login/")
 def show_keuangan(request: HttpRequest):
     if request.user.groups.exists():
         groups = request.user.groups.all()
@@ -28,7 +28,7 @@ def show_admin(request):
 
     return render(request, "admin.html", context)
 
-@login_required
+@login_required(login_url="/login/")
 def show_user(request: HttpRequest):
     context = {
         'cashout_form': CreateCashoutForm()
