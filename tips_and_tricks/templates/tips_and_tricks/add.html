@@ -6,10 +6,12 @@
 {% endblock meta %}
 
 {% block content %}
+<script src="{% static 'js/addTask.js' %}"></script>
+
 <section class="vh-250">
   <div class="container-fluid h-custom">
     <div class="row justify-content-center align-items-center h-100">
-      <div class="col-md-10 col-lg-6 col-xl-6">
+      <div class="col-md-9 col-lg-6 col-xl-6">
         <h1 class="text-center" id="text1">E-Waste Bank</h1>
         <Center><h1 id="text2">Add Tips & Tricks Article</h1></Center>
         <img src="https://nathanielstern.com/newsite/wp-content/uploads/2020/05/IMG_9156-960x540.jpg"
@@ -94,9 +96,6 @@
   .vh-250{
     background-color: rgb(99, 170, 186);
   }
-  .h-custom {
-    height: calc(100% - 73px);
-  }
   @media (max-width: 450px) {
     .h-custom {
       height: 100%;
@@ -110,11 +109,11 @@
     font-size: 30px; 
     font-family: Helvetica;
     font-weight: bold; 
-    margin-top: 20px;
     color: black;
+    margin-top: 20px;
   }
   #text2{
-    font-size: 50px; 
+    font-size: 45px; 
     font-family: Helvetica;
     font-weight: bolder; 
     margin-top: 10px; 
@@ -122,5 +121,5 @@
   }
 
 </style>
-<script src="{% static 'js/addTask.js' %}"></script>
+
 {% endblock content %}
