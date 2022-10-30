@@ -4,17 +4,16 @@
 
 {% block content %}
     <div class="container">
-        <h1>Hello, world!</h1>
-        <h3>This is example app for Django template</h3>
+        <h1>Admin</h1>
     </div>
 
-<table class="table table-striped" id="table">
+    <table class="table table-striped" id="table">
 
-</table>
+    </table>
 
-<button class="btn btn-dark" id="cashout" type="button">Generate Penarikan</button>
-<button class="btn btn-dark" id="cashout" type="button">Generate Cashout</button>
+    <button class="btn btn-dark" id="cashout" type="button">Generate Penarikan</button>
+    <button class="btn btn-dark" id="uang_user" type="button">Generate Uang User</button>
 
-<script src="{% static 'js/admin.js' %}"></script>
+    <script src="{% static 'js/admin.js' %}"></script>
 
 {% endblock content %}
