@@ -13,7 +13,7 @@
     <div class="container-fluid mt-4">
         <p>Cashout</p>
         <p>User: {{cashout_object.user}}</p>
-        <p>Amount: {{cashout_object.amount}}</p>
+        <p>Amount: Rp{{cashout_object.amount|floatformat:2|intcomma}}</p>
         <p>Approved?: {{cashout_object.approved}}</p>
         <p>Disbursed?: {{cashout_object.disbursed}}</p>
     </div>
