@@ -44,7 +44,7 @@
                                                 </div>
                                             </div>
 
-                                            <p class="text-dark mt-3" id="briefDescription> ${data.fields.brief_description}</p>
+                                            <p class="text-dark mt-3" id="briefDescription"> ${data.fields.brief_description}</p>
 
                                             <a class="btn btn-warning btn-md"
                                                 id="button-readmore"
