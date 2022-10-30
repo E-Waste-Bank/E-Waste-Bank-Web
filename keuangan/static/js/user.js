@@ -63,7 +63,9 @@ function refresh_cashouts() {
                                     )
                                 ).append(
                                     $(`<td scope="col">`).append(
-                                        `${entry.fields.approved ? "Sudah" : "Belum"}` // todo jadiin tombol lihat detail
+                                        $(`<a href="/keuangan/cashout/${entry.pk}/" class="btn btn-primary text-wrap">`).append(
+                                            `Lihat Detail`
+                                        )
                                     )
                                 )
                     )
@@ -89,7 +91,7 @@ $(document).ready(function() {
             success: function (data) {
                 console.log("create cashout POST success");
                 $("#modal-create-cashout").modal("toggle");
-                $("#form-create-cashout > div > .form-control").each(function (i) {
+                $("#form-create-cashout > p > .form-control").each(function (i) {
                     $(this).val("");
                 });
                 refresh_dana_tersedia();
@@ -100,7 +102,7 @@ $(document).ready(function() {
                 if (jqxhr.status == 400) {
                     console.log("Server sent back 400")
                     $("#div-errors").prepend(
-                        $(`<p class="text-danger">`).append(
+                        $(`<p class="text-danger fw-semibold">`).append(
                             `${jqxhrObj['status']}`
                         )
                     )

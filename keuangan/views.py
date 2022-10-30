@@ -30,7 +30,10 @@ def show_admin(request):
 
 @login_required
 def show_user(request: HttpRequest):
-    return render(request, "user.html")
+    context = {
+        'cashout_form': CreateCashoutForm()
+    }
+    return render(request, "user.html", context)
 
 @login_required(login_url="/login/")
 def user_get_keuangan_data_json(request: HttpRequest):
