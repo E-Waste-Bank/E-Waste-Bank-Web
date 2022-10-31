@@ -119,11 +119,12 @@ def admin_get_all_cashouts_json(request: HttpRequest):
 def admin_edit_cashout(request: HttpRequest, id: int): # TODO: Still can't get the checkbox value
     if request.method == "POST":
         form = EditCashoutForm(request.POST)
+        
         if form.is_valid():
             cashout_object = Cashout.objects.get(pk = id)
-
-            cashout_object.approved = request.POST.get('approved') # form.cleaned_data['approved']
-
+            cashout_object.approved = form.cleaned_data['approved']
             cashout_object.save()
+        
+        return HttpResponse(serializers.serialize("json", [cashout_object]))
     
     return HttpResponseRedirect(reverse("keuangan:show_admin"))

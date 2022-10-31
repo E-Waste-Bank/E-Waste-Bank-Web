@@ -10,12 +10,9 @@ class CreateCashoutForm(forms.ModelForm):
         super(CreateCashoutForm, self).__init__(*args, **kwargs)
         self.fields['amount'].widget.attrs.update({'class': 'form-control'})
     
-class EditCashoutForm(forms.ModelForm):
+class EditCashoutForm(forms.Form):
 
-    approved = forms.BooleanField() 
-    class Meta:
-        model = Cashout
-        fields = ['approved']
+    approved = forms.BooleanField(widget=forms.CheckboxInput, required= False)
 
     def __init__(self, *args, **kwargs):
         super(EditCashoutForm, self).__init__(*args, **kwargs)
