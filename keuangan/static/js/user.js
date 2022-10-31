@@ -28,7 +28,7 @@ function refresh_cashouts() {
 
             } else {
                 $("#table-parent").append(
-                    $(`<table class="table table-striped table-hover table-hover table-bordered mx-auto" id="table-cashouts">`).append(
+                    $(`<table class="table table-striped table-hover table-bordered table-sm table-responsive-md mx-auto" id="table-cashouts">`).append(
                         $("<thead>").append(
                             $("<tr>").append(
                                 $(`<th scope="col">`).append(
@@ -36,11 +36,11 @@ function refresh_cashouts() {
                                 )
                             ).append(
                                 $(`<th scope="col">`).append(
-                                    `Jumlah`
+                                    `Jumlah Dana yang Ditarik`
                                 )
                             ).append(
                                 $(`<th scope="col">`).append(
-                                    `Tombol`
+                                    `Lihat Detail`
                                 )
                             )
                         )
