@@ -1,7 +1,6 @@
 #latest-three-feedback{
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-direction: row;
     gap: 15px;
 }
 
