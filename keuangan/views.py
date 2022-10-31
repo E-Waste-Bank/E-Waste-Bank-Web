@@ -23,7 +23,10 @@ def show_keuangan(request: HttpRequest):
 
 @login_required(login_url="/login/")
 def show_admin(request: HttpRequest):
-    return render(request, "admin.html")
+    context = {
+        'form': EditCashoutForm()
+    }
+    return render(request, "admin.html", context)
 
 @login_required(login_url="/login/")
 def show_user(request: HttpRequest):
@@ -39,14 +42,6 @@ def user_get_keuangan_data_json(request: HttpRequest):
 @login_required(login_url="/login/")
 def user_get_all_cashouts_json(request: HttpRequest): # TODO test
     return HttpResponse(serializers.serialize("json", Cashout.objects.filter(user = request.user)), content_type="application/json")
-
-@login_required(login_url="/login/")
-def admin_get_keuangan_data_json(request: HttpRequest):
-    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
-
-@login_required(login_url="/login/")
-def admin_get_all_cashouts_json(request: HttpRequest):
-    return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/") # TODO set login URL, create tests
 def user_create_cashout(request: HttpRequest):
@@ -111,3 +106,24 @@ def user_get_cashout_html(request: HttpRequest, id: int):
 
     # jika obj cashout dgn id tsb tdk ditemukan
     return HttpResponse(status=404)
+
+@login_required(login_url="/login/")
+def admin_get_keuangan_data_json(request: HttpRequest):
+    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
+
+@login_required(login_url="/login/")
+def admin_get_all_cashouts_json(request: HttpRequest):
+    return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
+
+@login_required(login_url="/login/")
+def admin_edit_cashout(request: HttpRequest, id: int): # TODO: Still can't get the checkbox value
+    if request.method == "POST":
+        form = EditCashoutForm(request.POST)
+        if form.is_valid():
+            cashout_object = Cashout.objects.get(pk = id)
+
+            cashout_object.approved = request.POST.get('approved') # form.cleaned_data['approved']
+
+            cashout_object.save()
+    
+    return HttpResponseRedirect(reverse("keuangan:show_admin"))

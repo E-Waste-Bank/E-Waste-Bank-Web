@@ -3,16 +3,32 @@
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <h1>Admin</h1>
+    <div class="modal fade" id="modal-update-cashout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Cashout</h4>
+                </div>
+                <form method="POST" id="form-update-cashout">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ form }}
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Cashout">
+                        <button class="btn btn-primary" id="close" type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
     </div>
+
+    <button class="btn btn-dark" id="cashout" type="button">Generate Penarikan</button>
+    <button class="btn btn-dark" id="uang_user" type="button">Generate Uang User</button>
 
     <table class="table table-striped" id="table">
 
     </table>
-
-    <button class="btn btn-dark" id="cashout" type="button">Generate Penarikan</button>
-    <button class="btn btn-dark" id="uang_user" type="button">Generate Uang User</button>
 
     <script src="{% static 'js/admin.js' %}"></script>
 

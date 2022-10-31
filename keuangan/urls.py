@@ -13,4 +13,5 @@ urlpatterns = [
     path('json/user-cashouts/', user_get_all_cashouts_json, name='user_get_all_cashouts_json'),
     path('json/admin/', admin_get_keuangan_data_json, name='admin_get_keuangan_data_json'),
     path('json/admin-cashouts/', admin_get_all_cashouts_json, name='admin_get_all_cashouts_json'),
+    path('edit-cashout/<int:id>/', admin_edit_cashout, name='admin_edit_cashout'),
 ]
