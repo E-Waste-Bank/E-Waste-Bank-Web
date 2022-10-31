@@ -53,6 +53,9 @@ def user_create_cashout(request: HttpRequest):
             jumlah_uang_user = uang_model_user.uang_user
             jumlah_uang_ditarik = form.cleaned_data['amount']
 
+            if jumlah_uang_ditarik <= 0:
+                return JsonResponse({"status": "Invalid amount"}, status=400)
+
             if jumlah_uang_user < jumlah_uang_ditarik:
                 return JsonResponse({"status": "Not enough funds"}, status=400)
 
@@ -75,7 +78,11 @@ def user_create_cashout(request: HttpRequest):
             
     else:
         # hanya boleh POST ke endpoint ini
-        return JsonResponse({"status": "Invalid method"}, status=405)
+        response = JsonResponse({"status": "Invalid method"}, status=405)
+
+        # Allow header as per HTTP spec https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+        response['Allow'] = 'POST'
+        return response
 
 # ! INITIAL NOT DONE !
 @login_required(login_url="/login/")

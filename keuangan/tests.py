@@ -46,8 +46,12 @@ class KeuanganUserViewsTest(TestCase):
         response = self.client.get("/keuangan/user/create-cashout/")
         self.assertEqual(response.status_code, 405)
 
-    def test_keuangan_user_create_cashout_response_400_invalid(self):
+    def test_keuangan_user_create_cashout_response_400_negative(self):
         response = self.client.post("/keuangan/user/create-cashout/", {'amount': '-10000'})
+        self.assertEqual(response.status_code, 400)
+
+    def test_keuangan_user_create_cashout_response_400_invalid(self):
+        response = self.client.post("/keuangan/user/create-cashout/", {'amount': 'a'})
         self.assertEqual(response.status_code, 400)
 
     def test_keuangan_user_create_cashout_response_400_funds(self):
