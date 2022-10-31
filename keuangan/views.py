@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from keuangan.models import KeuanganAdmin, Cashout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
@@ -132,10 +132,8 @@ def admin_edit_cashout(request: HttpRequest, id: int):
             cashout_object = Cashout.objects.get(pk = id)
             cashout_object.approved = form.cleaned_data['approved']
             cashout_object.save()
-        
-        return HttpResponse(serializers.serialize("json", [cashout_object]))
     
-    return HttpResponseRedirect(reverse("keuangan:show_admin"))
+    return redirect('keuangan:show_admin')
 
 @login_required(login_url="/login/")
 def admin_edit_uang_user(request: HttpRequest, id: int):
@@ -148,6 +146,4 @@ def admin_edit_uang_user(request: HttpRequest, id: int):
             user.uang_user += uang_tambahan
             user.save()
         
-        return HttpResponse(serializers.serialize("json", [user]))
-    
-    return HttpResponseRedirect(reverse("keuangan:show_admin"))
+    return redirect('keuangan:show_admin')

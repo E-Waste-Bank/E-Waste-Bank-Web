@@ -68,8 +68,9 @@ function edit_cashout(id) {
             body: new FormData(document.querySelector('#form-update-cashout'))
         }).then(document.getElementById("close1").click())
           .then(refresh_table_cashout)
-          
-    })
+
+          form.reset()
+    }, {once : true})
 
     return false
 }
@@ -119,6 +120,9 @@ function edit_uang_user(id) {
     $("#modal-update-uang-user").modal("toggle")
 
     var form = document.getElementById('form-update-uang-user')
+
+    console.log("POST sent")
+
     form.addEventListener('submit', function(e) {
         e.preventDefault()
 
@@ -127,8 +131,10 @@ function edit_uang_user(id) {
             body: new FormData(document.querySelector('#form-update-uang-user'))
         }).then(document.getElementById("close2").click())
           .then(refresh_table_uang_user)
-          
-    })
+
+          form.reset()
+
+    }, {once : true})
 
     return false
 }
