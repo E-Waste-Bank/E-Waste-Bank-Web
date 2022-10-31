@@ -78,7 +78,11 @@ def user_create_cashout(request: HttpRequest):
             
     else:
         # hanya boleh POST ke endpoint ini
-        return JsonResponse({"status": "Invalid method"}, status=405)
+        response = JsonResponse({"status": "Invalid method"}, status=405)
+
+        # Allow header as per HTTP spec https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+        response['Allow'] = 'POST'
+        return response
 
 # ! INITIAL NOT DONE !
 @login_required(login_url="/login/")
