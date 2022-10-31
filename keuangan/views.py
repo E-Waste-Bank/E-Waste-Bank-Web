@@ -36,11 +36,9 @@ def show_user(request: HttpRequest):
     }
     return render(request, "user.html", context)
 
-@login_required(login_url="/login/")
 def user_get_keuangan_data_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.filter(user = request.user)), content_type="application/json")
 
-@login_required(login_url="/login/")
 def user_get_all_cashouts_json(request: HttpRequest): # TODO test
     return HttpResponse(serializers.serialize("json", Cashout.objects.filter(user = request.user)), content_type="application/json")
 
@@ -86,7 +84,6 @@ def user_create_cashout(request: HttpRequest):
         return response
 
 # ! INITIAL NOT DONE !
-@login_required(login_url="/login/")
 def user_get_cashout_html(request: HttpRequest, id: int):
     if Cashout.objects.filter(pk = id).exists():
         cashout_object = Cashout.objects.get(pk = id)
@@ -115,11 +112,9 @@ def user_get_cashout_html(request: HttpRequest, id: int):
     # jika obj cashout dgn id tsb tdk ditemukan
     return HttpResponse(status=404)
 
-@login_required(login_url="/login/")
 def admin_get_keuangan_data_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
 
-@login_required(login_url="/login/")
 def admin_get_all_cashouts_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
 
