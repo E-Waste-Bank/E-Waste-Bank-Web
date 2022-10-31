@@ -12,11 +12,31 @@
                 <form method="POST" id="form-update-cashout">
                     {% csrf_token %}
                     <div class="modal-body">
-                        {{ form }}
+                        {{ admin_cashout_form }}
                     </div>
                     <div class="modal-footer">
                         <input class="btn btn-primary" type="submit" name="submit" value="Update Cashout">
-                        <button class="btn btn-primary" id="close" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" id="close1" type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-update-uang-user">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Uang User</h4>
+                </div>
+                <form method="POST" id="form-update-uang-user">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ admin_uang_user_form }}
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Uang User">
+                        <button class="btn btn-primary" id="close2" type="button" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div> 

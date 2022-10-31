@@ -66,7 +66,7 @@ function edit_cashout(id) {
         fetch(`/keuangan/edit-cashout/${id}/`, {
             method: "POST",
             body: new FormData(document.querySelector('#form-update-cashout'))
-        }).then(document.getElementById("close").click())
+        }).then(document.getElementById("close1").click())
           .then(refresh_table_cashout)
           
     })
@@ -91,6 +91,7 @@ async function refresh_table_uang_user() {
             <tr>
                 <th scope="col">Nama</th>
                 <th scope="col">Jumlah</th>
+                <th scope="col">Tambah Uang</th>
             </tr>
         </thead>
 
@@ -102,6 +103,9 @@ async function refresh_table_uang_user() {
             <tr>
                 <th scope="row">${item.fields.user}</th>
                 <td>${item.fields.uang_user}</td>
+                <td>
+                <button class="btn btn-primary text-wrap" onClick="edit_uang_user(${item.pk})"> Tambah </button>
+                </td>
             </tr>
             ` 
         })
@@ -109,6 +113,24 @@ async function refresh_table_uang_user() {
         htmlString += `</tbody>`
     }
     document.getElementById("table").innerHTML = htmlString
+}
+
+function edit_uang_user(id) {
+    $("#modal-update-uang-user").modal("toggle")
+
+    var form = document.getElementById('form-update-uang-user')
+    form.addEventListener('submit', function(e) {
+        e.preventDefault()
+
+        fetch(`/keuangan/edit-uang-user/${id}/`, {
+            method: "POST",
+            body: new FormData(document.querySelector('#form-update-uang-user'))
+        }).then(document.getElementById("close2").click())
+          .then(refresh_table_uang_user)
+          
+    })
+
+    return false
 }
 
 document.getElementById("cashout").onclick = refresh_table_cashout

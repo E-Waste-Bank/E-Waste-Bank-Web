@@ -24,7 +24,8 @@ def show_keuangan(request: HttpRequest):
 @login_required(login_url="/login/")
 def show_admin(request: HttpRequest):
     context = {
-        'form': EditCashoutForm()
+        'admin_cashout_form': EditCashoutForm(),
+        'admin_uang_user_form': EditUangUserForm()
     }
     return render(request, "admin.html", context)
 
@@ -123,15 +124,30 @@ def admin_get_all_cashouts_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/")
-def admin_edit_cashout(request: HttpRequest, id: int): # TODO: Still can't get the checkbox value
+def admin_edit_cashout(request: HttpRequest, id: int):
     if request.method == "POST":
         form = EditCashoutForm(request.POST)
-        
+
         if form.is_valid():
             cashout_object = Cashout.objects.get(pk = id)
             cashout_object.approved = form.cleaned_data['approved']
             cashout_object.save()
         
         return HttpResponse(serializers.serialize("json", [cashout_object]))
+    
+    return HttpResponseRedirect(reverse("keuangan:show_admin"))
+
+@login_required(login_url="/login/")
+def admin_edit_uang_user(request: HttpRequest, id: int):
+    if request.method == "POST":
+        form = EditUangUserForm(request.POST)
+
+        if form.is_valid():
+            user = KeuanganAdmin.objects.get(pk = id)
+            uang_tambahan = form.cleaned_data['uang_user']
+            user.uang_user += uang_tambahan
+            user.save()
+        
+        return HttpResponse(serializers.serialize("json", [user]))
     
     return HttpResponseRedirect(reverse("keuangan:show_admin"))

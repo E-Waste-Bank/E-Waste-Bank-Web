@@ -18,3 +18,12 @@ class EditCashoutForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(EditCashoutForm, self).__init__(*args, **kwargs)
         self.fields['approved'].widget.attrs.update({'class': 'form-check-input'})
+
+class EditUangUserForm(forms.Form):
+
+    uang_user = forms.FloatField()
+
+    def __init__(self, *args, **kwargs):
+        super(EditUangUserForm, self).__init__(*args, **kwargs)
+        self.fields['uang_user'].widget.attrs['min'] = 0.0
+        self.fields['uang_user'].widget.attrs.update({'class': 'form-control'})
