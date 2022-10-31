@@ -53,6 +53,9 @@ def user_create_cashout(request: HttpRequest):
             jumlah_uang_user = uang_model_user.uang_user
             jumlah_uang_ditarik = form.cleaned_data['amount']
 
+            if jumlah_uang_ditarik <= 0:
+                return JsonResponse({"status": "Invalid amount"}, status=400)
+
             if jumlah_uang_user < jumlah_uang_ditarik:
                 return JsonResponse({"status": "Not enough funds"}, status=400)
 
