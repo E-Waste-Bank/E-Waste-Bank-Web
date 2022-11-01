@@ -9,7 +9,7 @@ class CreateCashoutForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateCashoutForm, self).__init__(*args, **kwargs)
         self.fields['amount'].widget.attrs['min'] = 0.0
-        self.fields['amount'].widget.attrs.update({'class': 'form-control'})
+        self.fields['amount'].widget.attrs.update({'class': 'form-control', 'step':'0.01'})
     
 class EditCashoutForm(forms.Form):
 
