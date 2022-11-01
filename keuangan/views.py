@@ -85,7 +85,6 @@ def user_create_cashout(request: HttpRequest):
         response['Allow'] = 'POST'
         return response
 
-# ! INITIAL NOT DONE !
 @login_required(login_url="/login/")
 def user_get_cashout_html(request: HttpRequest, id: int):
     if Cashout.objects.filter(pk = id).exists():
@@ -93,15 +92,15 @@ def user_get_cashout_html(request: HttpRequest, id: int):
         # validasi user adlh admin ATAU user pemilik cashout
         authorized = False
 
-        if request.user.groups.exists():
+        if request.user == cashout_object.user:
+            authorized = True
+
+        if not authorized and request.user.groups.exists():
             groups = request.user.groups.all()
 
             for group in groups:
                 if group.name == "admin":
                     authorized = True
-
-        if request.user == cashout_object.user:
-            authorized = True
 
         context = {
             "cashout_object": cashout_object
@@ -110,10 +109,10 @@ def user_get_cashout_html(request: HttpRequest, id: int):
             return render(request, "cashout.html", context)
         
         else:
-            return HttpResponse(status=403)
+            return HttpResponse("Anda tidak diperbolehkan mengakses halaman ini. <br> You are forbidden from accessing this page.", status=403)
 
     # jika obj cashout dgn id tsb tdk ditemukan
-    return HttpResponse(status=404)
+    return HttpResponse(f"ID: {id} <br> Penarikan tidak ditemukan. <br> Cashout not found.", status=404)
 
 @login_required(login_url="/login/")
 def admin_get_keuangan_data_json(request: HttpRequest):
