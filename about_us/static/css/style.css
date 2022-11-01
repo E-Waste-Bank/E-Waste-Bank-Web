@@ -1,14 +1,17 @@
 #latest-three-feedback{
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
+  margin: auto;
+  display: grid;
+  gap: 15px;
 }
 
+/* #about-us {
+  background-color: bisque;
+} */
 
 @media (max-width: 600px) {
     #latest-three-feedback {
       display: flex;
       flex-direction: column;
-
     }
 }
+

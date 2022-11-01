@@ -26,6 +26,9 @@ def get_feedback_json(request):
     latest_three = Feedback.objects.all().order_by('-pk')[:3]
     return HttpResponse(serializers.serialize("json", latest_three), content_type="application/json")
 
-# def show_json_by_id(request, id):
-#     data = Feedback.objects.filter(pk=id)
-#     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+def show_feedback_by_id(request, id):
+    context = {
+        'data': Feedback.objects.get(pk=id)
+    }
+    
+    return render(request, 'show_feedback.html', context)

@@ -3,12 +3,12 @@ function get_latest_three(){
     $.getJSON("/about-us/get-latest-three", function (data) {
         $.each(data, function(i, entry) {
             cards+=`
-            <div class="card-deck" >
+            <div class="card-deck" style="max-width:1330px;">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">${entry.fields.user}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">${entry.fields.date}</h6>
-                        <p class="card-text">${entry.fields.user_feedback}</p>
+                        <h4 class="card-title">${entry.fields.name}</h4>
+                        <medium class="card-subtitle mb-2 text-muted">${entry.fields.date}</medium>
+                        <p class="card-text">${entry.fields.your_feedback}</p>
                     </div>
                 </div>     
             </div>

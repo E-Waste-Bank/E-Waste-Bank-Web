@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card" style="margin:50px;">
+    <div class="card-header">
+        {{data.date}}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>{{data.your_feedback}}</p>
+        <footer class="blockquote-footer" style="background-color:white;">{{data.name}}</footer>
+      </blockquote>
+    </div>
+  </div>
+{% endblock content %}

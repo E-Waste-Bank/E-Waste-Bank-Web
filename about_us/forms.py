@@ -4,6 +4,6 @@ from about_us.models import Feedback
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ['user', 'user_feedback']
+        fields = ['name', 'your_feedback']
 
 
