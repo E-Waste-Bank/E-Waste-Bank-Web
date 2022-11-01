@@ -25,8 +25,10 @@ function refresh_cashouts() {
             // kalau blm ada cashout data akan empty
             if ($.isEmptyObject(data)) {
                 $(".table-cashout-parent").append(
-                    $(`<h4>`).append(
+                    $(`<h4 class="text-center">`).append(
                         `Belum ada request penarikan!`
+                    ).append(
+                        `<h5 class="text-center text-muted fst-italic">Yuk, <a href="#" onclick="$('#modal-create-cashout').modal('toggle')">buat penarikan baru</a>!</h5>`
                     )
                 );
 
@@ -57,7 +59,7 @@ function refresh_cashouts() {
                 } else {
                     // Jika blm ada samsek data yg sdh diapprove
                     $("#table-done-parent").append(
-                        $(`<h4>`).append(
+                        $(`<h4 class="text-center">`).append(
                             `Tidak ada request penarikan yang sudah disetujui!`
                         )
                     );
@@ -89,7 +91,7 @@ function refresh_cashouts() {
                 } else {
                     // Jika blm ada samsek data yg pending
                     $("#table-pending-parent").append(
-                        $(`<h4>`).append(
+                        $(`<h4 class="text-center">`).append(
                             `Tidak ada request penarikan yang belum disetujui!`
                         )
                     );
