@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.core import serializers
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from tips_and_tricks.models import TipsAndTrick
 from tips_and_tricks.forms import AddForm
+from django.views.decorators.csrf import csrf_exempt
 
 # Custom function to check the request type 
 def is_ajax(request):
@@ -34,39 +35,14 @@ def index(request):
     return render(request, 'tips_and_tricks/main.html', response)
 
 # Function untuk add new article tips and tricks
+@csrf_exempt
 def add(request):
     form = AddForm(request.POST)
     if form.is_valid():
-        form.save()
+        formSave = form.save()
+        formSave.user = request.user
+        formSave.save()
         return HttpResponse("")
-
-    # form = AddForm()
-    # if request.method == "POST":
-    #     form = AddForm(request.POST)
-
-    #     if form.is_valid():
-    #         title = form.cleaned_data['title']
-    #         source = form.cleaned_data['source']
-    #         pubDate = form.cleaned_data['published_date']
-    #         imageURL = form.cleaned_data['imageURL']
-    #         articleURL = form.cleaned_data['articleURL']
-    #         briefDesc = form.cleaned_data['briefDesc']
-
-    #         new_form = TipsAndTrick.objects.create(title=title, source=source, pubDate=pubDate, imageURL=imageURL, articleURL=articleURL, briefDes=briefDesc)
-    #         new_form.save()
-
-    #         result = {
-    #             'fields':{
-    #                 'title':new_form.title,
-    #                 'source':new_form.source,
-    #                 'pubDate':new_form.pubDate,
-    #                 'imageURL':new_form.user.imageURL,
-    #                 'articleURL':new_form.user.articleURL,
-    #                 'briefDesc':new_form.user.briefDesc,
-    #             },
-    #             'pk':new_form.pk
-    #         }
-    #         return JsonResponse(result)
     response = {'form': form}
     return render(request, 'tips_and_tricks/add.html', response)
 

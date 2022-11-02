@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class TipsAndTrick(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=500)
     source = models.CharField(max_length=500)
     published_date = models.DateField()

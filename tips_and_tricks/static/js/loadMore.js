@@ -31,6 +31,8 @@
                                                 <h3 class="mb-1"> ${data.fields.title}</h3>
                                             </div>
 
+                                            <h1>My To Do List <br>Hello, ${data.fields.user}!</h1>
+
                                             <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
                                                 <div class="d-flex flex-row align-items-center" id="calendar"> 
                                                     <i class="fa fa-calendar"></i>
@@ -43,6 +45,7 @@
                                                     <h5 class="ms-1 views"> ${data.fields.source}</h5> 
                                                 </div>
                                             </div>
+                                            <h1>Hello, ${data.fields.user}!</h1>
 
                                             <p class="text-dark mt-3" id="briefDescription"> ${data.fields.brief_description}</p>
 
