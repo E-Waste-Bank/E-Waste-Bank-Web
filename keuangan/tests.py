@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from .models import *
+from .forms import *
 
 # Create your tests here.
 
@@ -101,6 +102,18 @@ class KeuanganUserViewsTest(TestCase):
         
         response = self.client_admin.get(f"/keuangan/cashout/{cashout_obj.pk}/")
         self.assertEqual(response.status_code, 200)
+
+
+class KeuanganUserFormsTest(TestCase):
+    def test_cashout_form_valid_data(self):
+        valid_data = {'amount': '100000'}
+        form = CreateCashoutForm(data = valid_data)
+        self.assertTrue(form.is_valid())
+    
+    def test_cashout_form_invalid_NaN_data(self):
+        invalid_data = {'amount': 'NotANumber'}
+        form = CreateCashoutForm(data = invalid_data)
+        self.assertFalse(form.is_valid())
 
 class CashoutModelsTest(TestCase):
     def setUp(self):
