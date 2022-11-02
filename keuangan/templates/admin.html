@@ -2,7 +2,12 @@
 
 {% load static %}
 
+{% block meta %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock meta %}
+
 {% block content %}
+    {% include 'navbar.html' %}
     <div class="modal fade" id="modal-update-cashout">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -43,13 +48,15 @@
         </div>
     </div>
 
-    <button class="btn btn-dark" id="cashout" type="button">Generate Penarikan</button>
-    <button class="btn btn-dark" id="uang_user" type="button">Generate Uang User</button>
+    <div class="sidebar">
+        <a href="#" class="text-center font-weight-bold active" id="cashout">Penarikan</a>
+        <a href="#" class="text-center font-weight-bold" id="uang_user">Uang User</a>
+    </div>
 
-    <table class="table table-striped" id="table">
-
-    </table>
+    <div class="content">
+        <table class="table table-bordered table-striped table-responsive-md text-center mx-auto" id="table" style="overflow-y: scroll;">
+        </table>
+    </div>
 
     <script src="{% static 'js/admin.js' %}"></script>
-
 {% endblock content %}

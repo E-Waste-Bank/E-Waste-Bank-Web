@@ -10,66 +10,137 @@ function refresh_dana_tersedia() {
 }
 
 function refresh_cashouts() {
+    // filter buat ngecek ada elemen yg approved/pending di array ga (pake Array.some())
+    const approved = (entry) => entry.fields.approved;
+    const pending = (entry) => !(entry.fields.approved);
+
     $.ajax({
         type: "GET",
         url: "/keuangan/json/user-cashouts/",
         dataType: "json",
         success: function (data) {
             console.log("all cashouts GET success");
-            $("#table-parent").empty();
+            $(".table-cashout-parent").empty();
 
             // kalau blm ada cashout data akan empty
             if ($.isEmptyObject(data)) {
-                $("#table-parent").append(
-                    $(`<h3>`).append(
+                $(".table-cashout-parent").append(
+                    $(`<h4 class="text-center">`).append(
                         `Belum ada request penarikan!`
+                    ).append(
+                        `<h5 class="text-center text-muted fst-italic">Yuk, <a href="#" onclick="$('#modal-create-cashout').modal('toggle')">buat penarikan baru</a>!</h5>`
                     )
                 );
 
             } else {
-                $("#table-parent").append(
-                    $(`<table class="table table-striped table-hover table-bordered table-sm table-responsive-md mx-auto" id="table-cashouts">`).append(
-                        $("<thead>").append(
-                            $("<tr>").append(
-                                $(`<th scope="col">`).append(
-                                    `ID Penarikan`
+                // Cek jika ada data yg sdh diapprove pake filter yg sdh dibuat
+                if (data.some(approved)) {
+                    $("#table-done-parent").append(
+                        $(`<table class="table table-striped table-hover table-bordered table-sm table-responsive-md mx-auto">`).append(
+                            $("<thead>").append(
+                                $("<tr>").append(
+                                    $(`<th scope="col">`).append(
+                                        `ID Penarikan`
+                                    )
+                                ).append(
+                                    $(`<th scope="col">`).append(
+                                        `Jumlah Dana yang Ditarik`
+                                    )
+                                ).append(
+                                    $(`<th scope="col">`).append(
+                                        `Lihat Detail`
+                                    )
+                                )
+                            )
+                        ).append(
+                            $(`<tbody class="table-group-divider" id="cashouts-parent">`)
+                        )
+                    )
+                } else {
+                    // Jika blm ada samsek data yg sdh diapprove
+                    $("#table-done-parent").append(
+                        $(`<h4 class="text-center">`).append(
+                            `Tidak ada request penarikan yang sudah disetujui!`
+                        )
+                    );
+                }
+                
+                // Cek jika ada data yg pending pake filter yg sdh dibuat
+                if (data.some(pending)) {
+                    $("#table-pending-parent").append(
+                        $(`<table class="table table-striped table-hover table-bordered table-sm table-responsive-md mx-auto">`).append(
+                            $("<thead>").append(
+                                $("<tr>").append(
+                                    $(`<th scope="col">`).append(
+                                        `ID Penarikan`
+                                    )
+                                ).append(
+                                    $(`<th scope="col">`).append(
+                                        `Jumlah Dana yang Ditarik`
+                                    )
+                                ).append(
+                                    $(`<th scope="col">`).append(
+                                        `Lihat Detail`
+                                    )
+                                )
+                            )
+                        ).append(
+                            $(`<tbody class="table-group-divider" id="cashouts-parent">`)
+                        )
+                    )
+                } else {
+                    // Jika blm ada samsek data yg pending
+                    $("#table-pending-parent").append(
+                        $(`<h4 class="text-center">`).append(
+                            `Tidak ada request penarikan yang belum disetujui!`
+                        )
+                    );
+                }
+
+                $(data).each(function (i, entry) {
+                    if (entry.fields.approved) {
+                        $("#table-done-parent > .table").append(
+                            $(`<tr>`).append(
+                                $(`<td scope="col">`).append(
+                                    entry.pk
                                 )
                             ).append(
-                                $(`<th scope="col">`).append(
-                                    `Jumlah Dana yang Ditarik`
+                                $(`<td scope="col">`).append(
+                                    `Rp${entry.fields.amount.toLocaleString('en', {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    })}`
                                 )
                             ).append(
-                                $(`<th scope="col">`).append(
-                                    `Lihat Detail`
+                                $(`<td scope="col">`).append(
+                                    $(`<a href="/keuangan/cashout/${entry.pk}/" class="btn btn-primary text-wrap">`).append(
+                                        `Lihat Detail`
+                                    )
                                 )
                             )
                         )
-                    ).append(
-                        $(`<tbody class="table-group-divider" id="cashouts-parent">`)
-                    )
-                );
-                $(data).each(function (i, entry) {
-                    $("#table-cashouts").append(
-                                $(`<tr>`).append(
-                                    $(`<td scope="col">`).append(
-                                        entry.pk
-                                    )
-                                ).append(
-                                    $(`<td scope="col">`).append(
-                                        `Rp${entry.fields.amount.toLocaleString('en', {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2
-                                        })}`
-                                    )
-                                ).append(
-                                    $(`<td scope="col">`).append(
-                                        $(`<a href="/keuangan/cashout/${entry.pk}/" class="btn btn-primary text-wrap">`).append(
-                                            `Lihat Detail`
-                                        )
+                    } else {
+                        $("#table-pending-parent > .table").append(
+                            $(`<tr>`).append(
+                                $(`<td scope="col">`).append(
+                                    entry.pk
+                                )
+                            ).append(
+                                $(`<td scope="col">`).append(
+                                    `Rp${entry.fields.amount.toLocaleString('en', {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    })}`
+                                )
+                            ).append(
+                                $(`<td scope="col">`).append(
+                                    $(`<a href="/keuangan/cashout/${entry.pk}/" class="btn btn-primary text-wrap">`).append(
+                                        `Lihat Detail`
                                     )
                                 )
-                    )
-                    
+                            )
+                        )
+                    }
                 })
             }
         },

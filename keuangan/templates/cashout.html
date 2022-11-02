@@ -3,18 +3,39 @@
 {% load static %}
 
 {% block meta %}
-
+<title>Penarikan ({{cashout_object.pk}}) | E-Waste Bank</title>
 {% endblock meta %}
 
 {% load humanize %}
 
 {% block content %}
-    <!--NOT DONE TODO-->
-    <div class="container-fluid mt-4">
-        <p>Cashout</p>
-        <p>User: {{cashout_object.user}}</p>
-        <p>Amount: Rp{{cashout_object.amount|floatformat:2|intcomma}}</p>
-        <p>Approved?: {{cashout_object.approved}}</p>
-        <p>Disbursed?: {{cashout_object.disbursed}}</p>
+    <div class="container-fluid mt-4 mb-4">
+        <h4>Permintaan Penarikan Dana <span class="text-muted">(ID: {{cashout_object.pk}})</span></h4>
+        <div class="form-floating col-lg-4 mb-2">
+            <input type="text" name="username" readonly disabled value="{{cashout_object.user}}" id="cashout_user" placeholder="Judul Task" class="form-control">
+            <label for="cashout_user" class="form-label">User Penarik</label>
+        </div>
+        <div class="col-lg-4">
+            <div class="input-group mb-3" id="amount-width-inherit">
+                <span class="input-group-text">Rp.</span>
+                <div class="form-floating">
+                    <input type="text" name="amount" readonly disabled value="{{cashout_object.amount|floatformat:2|intcomma}}" id="cashout_amount" placeholder="Jumlah Penarikan" class="form-control">
+                    <label for="cashout_amount" class="form-label">Jumlah Penarikan</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-check mb-4">
+            {% if cashout_object.approved %}
+            <input class="form-check-input" readonly type="checkbox" value="" id="cashout_disetujui" disabled="true" style="opacity: 1;" checked>
+            {% else %}
+            <input class="form-check-input" readonly type="checkbox" value="" id="cashout_disetujui" disabled="true" style="opacity: 1;">
+            {% endif %}
+            <label class="form-check-label" for="cashout_disetujui" style="opacity: 1;">Disetujui</label>
+        </div>
+
+        <!-- TODO disbursed used or not ???-->
+        <!-- <p>Disbursed?: {{cashout_object.disbursed}}</p> -->
+
+        <a class="btn btn-primary" href="/keuangan/" role="button">Back</a>
     </div>
 {% endblock content %}

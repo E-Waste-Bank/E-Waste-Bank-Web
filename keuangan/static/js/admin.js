@@ -8,7 +8,6 @@ async function get_json_uang_user() {
 }
 
 // TODO: fix user's username value
-// TODO: add POST -> update approve/disburse && uang_user
 async function refresh_table_cashout() {
     document.getElementById("table").innerHTML = ""
     const data = await get_json_cashout()
@@ -20,17 +19,14 @@ async function refresh_table_cashout() {
             <td>Tidak ada request penarikan</td>
         </tr>
         `
-        console.log("No data")
     } else {
-        console.log("Success")
         htmlString += `
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Jumlah</th>
-                <th scope="col">Approval</th>
-                <th scope="col"></th>
+                <th scope="col">Edit Approval</th>
             </tr>
         </thead>
 
@@ -43,12 +39,25 @@ async function refresh_table_cashout() {
                 <th scope="row">${item.pk}</th>
                 <td>${item.fields.user}</td>
                 <td>${item.fields.amount}</td>
-                <td>${item.fields.approved}</td>
-                <td>
-                <button class="btn btn-primary text-wrap" onClick="edit_cashout(${item.pk})"> Edit </button>
-                </td>
-            </tr>
             ` 
+
+            if (item.fields.approved) {
+                htmlString += `
+                <td>
+                <button class="btn btn-primary text-wrap" onClick="edit_cashout(${item.pk})" style="width: 6rem;"> Selesai </button>
+                </td>
+                </tr>
+                `
+            } else {
+                htmlString += `
+                <td>
+                <button class="btn btn-danger text-wrap" onClick="edit_cashout(${item.pk})" style="width: 6rem;"> Pending </button>
+                </td>
+                </tr>
+                `
+            }
+
+            // TODO: handle disbursal status
         })
 
         htmlString += `</tbody>`
@@ -139,6 +148,16 @@ function edit_uang_user(id) {
     return false
 }
 
-document.getElementById("cashout").onclick = refresh_table_cashout
-document.getElementById("uang_user").onclick = refresh_table_uang_user
 refresh_table_cashout()
+
+document.getElementById("cashout").onclick = function() {
+    refresh_table_cashout()
+    document.getElementById("cashout").classList.add("active");
+    document.getElementById("uang_user").classList.remove("active");
+};
+
+document.getElementById("uang_user").onclick = function() { 
+    refresh_table_uang_user()
+    document.getElementById("uang_user").classList.add("active");
+    document.getElementById("cashout").classList.remove("active");
+};
