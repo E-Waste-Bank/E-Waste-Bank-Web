@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonRes
 from django.urls import reverse
 from django.core import serializers
 from .forms import *
-
+from .decorators import admin_only
 
 
 # Create your views here.
@@ -22,6 +22,7 @@ def show_keuangan(request: HttpRequest):
     return HttpResponseRedirect(reverse("keuangan:show_user"))
 
 @login_required(login_url="/login/")
+@admin_only
 def show_admin(request: HttpRequest):
     context = {
         'admin_cashout_form': EditCashoutForm(),
@@ -115,14 +116,17 @@ def user_get_cashout_html(request: HttpRequest, id: int):
     return HttpResponse(f"ID: {id} <br> Penarikan tidak ditemukan. <br> Cashout not found.", status=404)
 
 @login_required(login_url="/login/")
+@admin_only
 def admin_get_keuangan_data_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/")
+@admin_only
 def admin_get_all_cashouts_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
 
 @login_required(login_url="/login/")
+@admin_only
 def admin_edit_cashout(request: HttpRequest, id: int):
     if request.method == "POST":
         form = EditCashoutForm(request.POST)
@@ -135,6 +139,7 @@ def admin_edit_cashout(request: HttpRequest, id: int):
     return redirect('keuangan:show_admin')
 
 @login_required(login_url="/login/")
+@admin_only
 def admin_edit_uang_user(request: HttpRequest, id: int):
     if request.method == "POST":
         form = EditUangUserForm(request.POST)
