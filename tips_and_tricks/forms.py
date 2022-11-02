@@ -8,7 +8,7 @@ class DateInput(forms.DateInput):
 class AddForm(forms.ModelForm):
     class Meta:
         model = TipsAndTrick
-        fields = '__all__'
+        fields = ['title', 'source', 'published_date', 'brief_description', 'image_url', 'article_url']
         widgets = {
             'published_date': DateInput(),
         }
