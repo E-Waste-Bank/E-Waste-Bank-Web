@@ -35,8 +35,12 @@ def show_penjemputan(request):
     return render(request, 'penjemputan.html', context)
 
 def show_json(request):
-    if request.user.is_superuser:
-        data_penjemputan_json = Penjemputan.objects.all()
+    if request.user.groups.exists():
+        groups = request.user.groups.all()
+        for group in groups:
+            if group.name == "admin":
+                data_penjemputan_json = Penjemputan.objects.all()
+                break 
     else:
         data_penjemputan_json = Penjemputan.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize("json", data_penjemputan_json), content_type="application/json")
