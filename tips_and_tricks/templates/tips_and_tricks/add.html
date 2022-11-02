@@ -63,25 +63,22 @@
                 </div>
   
                 <div class="form-outline mb-3" id="briefDesc">
-                  <div class="input-group mb-4 input-group-static">
+                  <div class="input-group mb-3 input-group-static">
                     <label>Article Brief Description</label>
                   </div>
                   {{ form.brief_description }}
                 </div>
   
                 <div class="text-center text-lg-start mt-4">
-                  <Center>
-                    <button type="submit" class="btn btn-warning btn-lg" id="submitBtn" 
-                      style="padding-left: 2.5rem; padding-right: 2.5rem; font-weight: bold">
-                      Submit</button>
-                  </Center>
+                  <button type="submit" class="btn btn-warning btn-lg" id="submitBtn" 
+                    style="margin-left: auto; padding-left: 2.5rem; padding-right: 2.5rem; font-weight: bold">
+                    Submit</button>
 
-                  <Center>
-                    <p class="small fw-bold mt-2 pt-1 mb-0" 
-                      style="font-size: 20px; padding-bottom: 40px;">
-                      Do you want to go back to a previous page? <a href="/tips-and-tricks" class="link-danger">
-                      Back</a></p>
-                  </Center>
+                  
+                  <p class="small fw-bold mt-2 pt-1 mb-0" 
+                    style="margin-left: auto; font-size: 20px; padding-bottom: 40px;">
+                    Back to a previous page? <a href="/tips-and-tricks" class="link-danger">
+                    Back</a></p>        
                 </div>
               </div>
             </div>
@@ -94,7 +91,9 @@
 
 <style>
   .vh-250{
-    background-color: rgb(99, 170, 186);
+    background-image: url(https://i.pinimg.com/originals/e9/19/02/e91902818e1a48a9b8c39eb9c2b3895e.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   @media (max-width: 450px) {
     .h-custom {
@@ -103,7 +102,8 @@
   }
   .container{
     font-weight: bold;
-    font-size: 20px
+    font-size: 20px;
+    justify-items: center;
   }
   #text1{
     font-size: 30px; 
@@ -118,6 +118,9 @@
     font-weight: bolder; 
     margin-top: 10px; 
     margin-bottom: 30px;
+  }
+  #briefDesc{
+    margin-left: 20px;
   }
 
 </style>

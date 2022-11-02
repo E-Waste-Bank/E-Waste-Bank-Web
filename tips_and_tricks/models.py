@@ -10,3 +10,8 @@ class TipsAndTrick(models.Model):
     brief_description = models.TextField()
     image_url =  models.CharField(max_length=500)
     article_url = models.CharField(max_length=500)
+
+class UserManager(models.Manager):
+    def unatural_key(self):
+        return self.username
+    User.natural_key = unatural_key

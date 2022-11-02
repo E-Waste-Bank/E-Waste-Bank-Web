@@ -53,7 +53,7 @@ def load_more(request):
     posts = TipsAndTrick.objects.all()[offset:limit + offset]
     totalData = TipsAndTrick.objects.count()
     data = {}
-    posts_json = serializers.serialize('json', posts)
+    posts_json = serializers.serialize('json', posts, use_natural_foreign_keys=True)
     return JsonResponse(data={
         'posts': posts_json,
         'totalResult': totalData
@@ -66,5 +66,5 @@ def search_json(request):
         articles = TipsAndTrick.objects.filter(title__icontains=q).order_by('id')
     else:
         articles = TipsAndTrick.objects.all().order_by('id')
-    data = serializers.serialize('json', articles)
+    data = serializers.serialize('json', articles, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")
