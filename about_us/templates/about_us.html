@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="about-us" style="padding: 50px;">
+    <div class="card row flex-row-reverse"style="padding: 10px;">
+        <img class="col-lg-4 card-img-end img-fluid p-0" style="height:225px; width:225px;margin-top:auto;margin-bottom:auto;margin-right:auto;margin-left:auto;" src="https://cdn-icons-png.flaticon.com/512/1039/1039783.png"/>
+        <div class="col-lg-8 card-body">
+            <h1 class="card-title">Get To Know Us!</h1>
+            <p align="justify" class="card-text">Kami hadir untuk memudahkan masyarakat untuk mengumpulkan dan mengelola barang elektronik yang sudah tidak 
+                layak pakai. Melalui aplikasi ini, masyarakat dapat mendapatkan uang melalui menjual barang elektronik yang sudah tidak layak pakai,
+                yang nantinya akan dijemput oleh kami. Selain itu, kami memberikan informasi tips dan tricks mengenai pengelolaan E Waste.</p>
+        </div>
+    </div>
+</div>
+  
+  
+<div id="feedbacks" style="padding: 50px;">
+    <h1>What People Say About Us</h1>
+    <!-- 3 cards latest feedback -->
+    <div id="latest-three-feedback">
+    </div>
+    <!-- end of cards -->
+    <table style="margin-top:20px;width: 230px;">
+        <tr>
+            <td><h5>Tell us yours!</h5></td>
+            <!-- Button trigger modal -->
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Click Here</button></td>
+        </tr>
+    </table>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Form Feedback</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <!-- Isi Form -->
+                <form id="form_add" method="POST" action="add-feedback/">
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    {{feedback_form.as_p}}
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/add_feedback.js' %}"></script>
+  {% endblock content %}
