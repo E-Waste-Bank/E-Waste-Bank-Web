@@ -16,12 +16,16 @@ def is_ajax(request):
 @login_required(login_url='/login/')
 def show_penjemputan(request):
     createForm = CreatePenjemputanForm(request.POST or None)
-    if request.user.is_superuser:
-        penjemputan = Penjemputan.objects.all()
-        role = 'admin'
-    else:
-        penjemputan = Penjemputan.objects.filter(user = request.user)
-        role = 'user'
+    if request.user.groups.exists():
+        groups = request.user.groups.all()
+        for group in groups:
+            if group.name == "admin":
+                penjemputan = Penjemputan.objects.all()
+                role = 'admin'
+                break 
+        else:
+            penjemputan = Penjemputan.objects.filter(user = request.user)
+            role = 'user'
     context = {
         'penjemputan': penjemputan,
         'forms': createForm,
