@@ -31,16 +31,20 @@
                                                 <h3 class="mb-1"> ${data.fields.title}</h3>
                                             </div>
 
+                                            <div class="d-flex justify-content-md-start" id="author"> 
+                                                <i class="fa fa-user-circle-o"></i> 
+                                                <h5 class="ms-1 views">Added by:  ${data.fields.user}!</h5> 
+                                            </div>
+
                                             <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
                                                 <div class="d-flex flex-row align-items-center" id="calendar"> 
                                                     <i class="fa fa-calendar"></i>
                                                     <h5 class="ms-1 views"> ${data.fields.published_date}</h5>
-                                                    <h4 class="ms-1 views">|</h4>
                                                 </div>
 
                                                 <div class="d-flex flex-row align-items-center ms-2" id="source"> 
                                                     <i class="fa fa-user"></i> 
-                                                    <h5 class="ms-1 views"> ${data.fields.source}</h5> 
+                                                    <h5 class="ms-1 views">Authored by:  ${data.fields.source}</h5> 
                                                 </div>
                                             </div>
 
