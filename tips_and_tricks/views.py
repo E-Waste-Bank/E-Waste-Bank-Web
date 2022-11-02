@@ -3,6 +3,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
+from tips_and_tricks.decorators import admin_only
 from tips_and_tricks.models import TipsAndTrick
 from tips_and_tricks.forms import AddForm
 from django.views.decorators.csrf import csrf_exempt
@@ -38,6 +39,7 @@ def index(request):
 # Function untuk add new article tips and tricks
 @login_required(login_url="/login/")
 @csrf_exempt
+@admin_only
 def add(request):
     form = AddForm(request.POST)
     if request.user.groups.exists():
