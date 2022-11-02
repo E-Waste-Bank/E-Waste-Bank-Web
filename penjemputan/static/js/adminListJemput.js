@@ -22,6 +22,10 @@ $(document).ready(function(){
         }
         dataPenjemputanAdmin += '</div>';
         dataPenjemputanAdmin += '</div>';
+        if(data.length != 0){
         document.getElementsByClassName("adminCardPenjemputan")[0].innerHTML = dataPenjemputanAdmin;
+        }else {
+        document.getElementsByClassName("adminCardPenjemputan")[0].innerHTML = '<h1>MAAF BELUM ADA PENJEMPUTAN!</h1>'
+    }
     });
 });
