@@ -1,10 +1,7 @@
 name: Test
 
 on:
-  push:
-    # testing for main is done on PR
-    branches-ignore:
-      - main
+  push
 
 jobs:
   UnitTest:
@@ -39,3 +36,6 @@ jobs:
       with:
         name: unittest-coverage-html
         path: htmlcov/
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3

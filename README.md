@@ -5,6 +5,7 @@
 > pada Semester Gasal, Tahun Ajaran 2022/2023.
 
 ![Main Deployment Status](https://github.com/E-Waste-Bank/E-Waste-Bank-Web/actions/workflows/dpl.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/github/E-Waste-Bank/E-Waste-Bank-Web/branch/main/graph/badge.svg?token=HGAMNIOP91)](https://codecov.io/github/E-Waste-Bank/E-Waste-Bank-Web)
 
 ## 👩🏻‍💻 Pengembang Aplikasi 🧑🏻‍💻
 - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan) (2106707315)
