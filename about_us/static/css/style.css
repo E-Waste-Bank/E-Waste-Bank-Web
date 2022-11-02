@@ -4,9 +4,10 @@
   gap: 15px;
 }
 
-/* #about-us {
-  background-color: bisque;
-} */
+#about-us {
+  background-color: #F8F7F3;
+} 
+
 
 @media (max-width: 600px) {
     #latest-three-feedback {
