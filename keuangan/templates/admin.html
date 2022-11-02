@@ -2,7 +2,12 @@
 
 {% load static %}
 
+{% block meta %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock meta %}
+
 {% block content %}
+    {% include 'navbar.html' %}
     <div class="modal fade" id="modal-update-cashout">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -44,15 +49,14 @@
     </div>
 
     <div class="sidebar">
-        <a href="#" class="text-center" role="button" id="cashout">Penarikan</a>
-        <a href="#" class="text-center" role="button" id="uang_user">Uang User</a>
+        <a href="#" class="text-center font-weight-bold active" id="cashout">Penarikan</a>
+        <a href="#" class="text-center font-weight-bold" id="uang_user">Uang User</a>
     </div>
 
     <div class="content">
-        <table class="table table-striped table-responsive-md mx-auto" id="table">
+        <table class="table table-bordered table-striped table-responsive-md text-center mx-auto" id="table" style="overflow-y: scroll;">
         </table>
     </div>
 
     <script src="{% static 'js/admin.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 {% endblock content %}
