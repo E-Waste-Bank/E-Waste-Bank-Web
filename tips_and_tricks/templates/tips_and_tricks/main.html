@@ -37,7 +37,7 @@
 {% include 'tips_and_tricks/carousel.html' %}
 <body id="tips_and_tricks">
   <!-- New Article Button -->
-  {% if user.groups.all.0.name == 'admin'%}
+  {% if user.groups.all.0.name == 'admin'%} 
   <div class="text-center mt-4">
     <a class="btn btn-warning btn-lg" 
       id="add-button" href="{% url 'add_tips' %}">

@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from .models import *
+from .forms import *
 
 # Create your tests here.
 
@@ -102,6 +103,18 @@ class KeuanganUserViewsTest(TestCase):
         response = self.client_admin.get(f"/keuangan/cashout/{cashout_obj.pk}/")
         self.assertEqual(response.status_code, 200)
 
+
+class KeuanganUserFormsTest(TestCase):
+    def test_cashout_form_valid_data(self):
+        valid_data = {'amount': '100000'}
+        form = CreateCashoutForm(data = valid_data)
+        self.assertTrue(form.is_valid())
+    
+    def test_cashout_form_invalid_NaN_data(self):
+        invalid_data = {'amount': 'NotANumber'}
+        form = CreateCashoutForm(data = invalid_data)
+        self.assertFalse(form.is_valid())
+
 class CashoutModelsTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(username="t3st_us3r", password='us3r_t3st', email='test@user.xyz')
@@ -124,3 +137,44 @@ class CashoutModelsTest(TestCase):
     def tearDown(self):
         self.client.logout()
         self.user.delete()
+
+class KeuanganAdminTest(TestCase):
+    def setUp(self):
+        self.admin_group = Group(name='admin')
+        self.admin_group.save()
+
+        self.admin =  get_user_model().objects.create_user(username="tes1admin", password='tes1admintes1admin', email='tes1admin@user.xyz')
+        self.admin.groups.add(self.admin_group)
+        self.admin.save()
+
+        self.user =  get_user_model().objects.create_user(username="tes2user", password='tes2usertes2user', email='tes2user@user.xyz')
+        self.user.save()
+
+        self.user2 =  get_user_model().objects.create_user(username="tes3user", password='tes3usertes3user', email='tes2user@user.xyz')
+        self.user.save()        
+
+        self.client_admin = Client()
+        self.client_admin.login(username="tes1admin", password="tes1admintes1admin")
+        
+        self.client_user = Client()
+        self.client_user.login(username="tes2user", password="tes2usertes2user")
+        
+        self.client_user2 = Client()
+        self.client_user2.login(username="tes3user", password="tes3usertes3user")
+
+    # ----------------------------------------------------
+    # Tes autorisasi page admin dan user diakses oleh masing-masing role
+    # ----------------------------------------------------
+    def test_user_access_keuanganAdmin(self):
+        response = self.client_user.get("/keuangan/admin/")
+        self.assertRedirects(response, "/keuangan/user/")
+    
+    def test_user_access_keuangan(self):
+        response = self.client_user.get("/keuangan/")
+        self.assertRedirects(response, "/keuangan/user/")
+
+    def test_admin_access_keuangan(self):
+        response = self.client_admin.get("/keuangan/")
+        self.assertRedirects(response, "/keuangan/admin/")
+    
+    

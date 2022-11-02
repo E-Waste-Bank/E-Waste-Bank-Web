@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.urls import reverse
+from django.utils.encoding import iri_to_uri
+from django.utils.http import url_has_allowed_host_and_scheme
 from keuangan.models import KeuanganAdmin
 
 # Create your views here.
@@ -18,7 +20,21 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home:landing_page')
+
+            # redirect implementation https://stackoverflow.com/a/44807947
+            next_url = request.GET.get('next')
+
+            # redirect URL validation https://stackoverflow.com/a/60372947
+            if next_url and url_has_allowed_host_and_scheme(next_url, None):
+                next_url = iri_to_uri(next_url)
+                response = redirect(next_url)
+
+            else:
+                # default is landing page
+                response = redirect(reverse('home:landing_page'))
+
+            return response
+            
         else:
             messages.info(request, 'Username atau Password salah!')
     context = {}

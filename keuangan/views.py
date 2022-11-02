@@ -116,12 +116,12 @@ def user_get_cashout_html(request: HttpRequest, id: int):
 @login_required(login_url="/login/")
 @admin_only
 def admin_get_keuangan_data_json(request: HttpRequest):
-    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all()), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.all(), use_natural_foreign_keys=True), content_type="application/json")
 
 @login_required(login_url="/login/")
 @admin_only
 def admin_get_all_cashouts_json(request: HttpRequest):
-    return HttpResponse(serializers.serialize("json", Cashout.objects.all()), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", Cashout.objects.all(), use_natural_foreign_keys=True), content_type="application/json")
 
 @login_required(login_url="/login/")
 @admin_only

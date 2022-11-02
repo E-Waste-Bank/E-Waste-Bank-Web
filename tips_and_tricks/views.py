@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.core import serializers
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.template.loader import render_to_string
 from tips_and_tricks.models import TipsAndTrick
 from tips_and_tricks.forms import AddForm
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 # Custom function to check the request type 
 def is_ajax(request):
@@ -34,39 +36,19 @@ def index(request):
     return render(request, 'tips_and_tricks/main.html', response)
 
 # Function untuk add new article tips and tricks
+@login_required(login_url="/login/")
+@csrf_exempt
 def add(request):
     form = AddForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return HttpResponse("")
-
-    # form = AddForm()
-    # if request.method == "POST":
-    #     form = AddForm(request.POST)
-
-    #     if form.is_valid():
-    #         title = form.cleaned_data['title']
-    #         source = form.cleaned_data['source']
-    #         pubDate = form.cleaned_data['published_date']
-    #         imageURL = form.cleaned_data['imageURL']
-    #         articleURL = form.cleaned_data['articleURL']
-    #         briefDesc = form.cleaned_data['briefDesc']
-
-    #         new_form = TipsAndTrick.objects.create(title=title, source=source, pubDate=pubDate, imageURL=imageURL, articleURL=articleURL, briefDes=briefDesc)
-    #         new_form.save()
-
-    #         result = {
-    #             'fields':{
-    #                 'title':new_form.title,
-    #                 'source':new_form.source,
-    #                 'pubDate':new_form.pubDate,
-    #                 'imageURL':new_form.user.imageURL,
-    #                 'articleURL':new_form.user.articleURL,
-    #                 'briefDesc':new_form.user.briefDesc,
-    #             },
-    #             'pk':new_form.pk
-    #         }
-    #         return JsonResponse(result)
+    if request.user.groups.exists():
+        groups = request.user.groups.all()
+        for group in groups:
+            if group.name == "admin":
+                if form.is_valid():
+                    formSave = form.save()
+                    formSave.user = request.user
+                    formSave.save()
+                    return HttpResponse("")
     response = {'form': form}
     return render(request, 'tips_and_tricks/add.html', response)
 
@@ -77,7 +59,7 @@ def load_more(request):
     posts = TipsAndTrick.objects.all()[offset:limit + offset]
     totalData = TipsAndTrick.objects.count()
     data = {}
-    posts_json = serializers.serialize('json', posts)
+    posts_json = serializers.serialize('json', posts, use_natural_foreign_keys=True)
     return JsonResponse(data={
         'posts': posts_json,
         'totalResult': totalData
@@ -90,5 +72,5 @@ def search_json(request):
         articles = TipsAndTrick.objects.filter(title__icontains=q).order_by('id')
     else:
         articles = TipsAndTrick.objects.all().order_by('id')
-    data = serializers.serialize('json', articles)
+    data = serializers.serialize('json', articles, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")

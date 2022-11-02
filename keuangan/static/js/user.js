@@ -142,6 +142,25 @@ function refresh_cashouts() {
                         )
                     }
                 })
+            
+                if (data.some(approved)) {
+                    $("#table-done-parent > .table").DataTable({
+                        "searching": false,
+                        columnDefs: [
+                            {targets: [1,2], orderable: false}
+                        ],
+                    });
+                }
+
+                if (data.some(pending)) {
+                    $("#table-pending-parent > .table").DataTable({
+                        "searching": false,
+                        columnDefs: [
+                            {targets: [1,2], orderable: false}
+                        ],
+                    });
+                }
+            
             }
         },
     })
