@@ -1,5 +1,62 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% load static %}
 
+{% block meta %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock meta %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+    <div class="modal fade" id="modal-update-cashout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Cashout</h4>
+                </div>
+                <form method="POST" id="form-update-cashout">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ admin_cashout_form }}
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Cashout">
+                        <button class="btn btn-primary" id="close1" type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-update-uang-user">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Uang User</h4>
+                </div>
+                <form method="POST" id="form-update-uang-user">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        {{ admin_uang_user_form }}
+                    </div>
+                    <div class="modal-footer">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Update Uang User">
+                        <button class="btn btn-primary" id="close2" type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div> 
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <a href="#" class="text-center font-weight-bold active" id="cashout">Penarikan</a>
+        <a href="#" class="text-center font-weight-bold" id="uang_user">Uang User</a>
+    </div>
+
+    <div class="content">
+        <table class="table table-bordered table-striped table-responsive-md text-center mx-auto" id="table" style="overflow-y: scroll;">
+        </table>
+    </div>
+
+    <script src="{% static 'js/admin.js' %}"></script>
 {% endblock content %}

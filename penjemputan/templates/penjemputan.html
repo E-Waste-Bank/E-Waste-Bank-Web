@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+    <title>penjemputan</title>
+    <!-- import jquery -->
+    <header>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static '/js/listJemput.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/adminListJemput.js' %}"></script>
+        <script type="text/javascript" src="{% static '/js/addJemput.js' %}"></script>
+    </header>
+{% endblock meta %}
+    
+{% block content %}
+<!-- untuk memunculkan card penjemputan dari sisi User -->
+{% if role == 'user' %}
+    <div class="cardPenjemputan"></div>
+    
+    <!-- untuk menambah card penjemputan -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Jemput Sampah
+    </button>
+{% endif %}
+
+<!-- untuk memunculkan card penjemputan dari sisi Admin -->
+{% if role == 'admin' %}
+    <div class="adminCardPenjemputan"></div>
+{% endif %}
+    
+
+
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="tanggal">Tanggal Jemput</label>
+                    {{ forms.tanggal_jemput }}
+                    <!-- <input type="date" class="form-control" id="tanggal" name="tanggal"> -->
+                </div>
+                <div class="form-group">
+                    <label for="waktu">Waktu Jemput</label>
+                    {{ forms.waktu_jemput }}
+                    <!-- <input type="time" class="form-control" id="waktu" name="waktu" rows="3"></input> -->
+                </div>
+                <div class="form-group">
+                    <label for="jenis">Jenis Sampah</label>
+                    {{ forms.jenis_sampah }}
+                    <!-- <input class="form-control" id="jenis" name="jenis" rows="3"></input> -->
+                </div>
+                <div class="form-group">
+                    <label for="berat">Berat</label>
+                    {{ forms.berat_sampah }}
+                    <!-- <input class="form-control" id="berat" name="berat" rows="3"></input> -->
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    {{ forms.alamat }}
+                    <!-- <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea> -->
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- 
+<script>
+        $(document).ready(function(){
+    $('#submitBtn').click(function(){
+        let tanggal_jemput = $('#tanggal').val();
+        let waktu_jemput = $('#waktu').val();
+        let jenis_sampah = $('#jenis').val();
+        let berat_sampah = $('#berat').val();
+        let alamat = $('#alamat').val();
+        let csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+        $('#exampleModal').modal('hide');
+        $.post("{% url 'penjemputan:add_penjemputan' %}", {
+            tanggal_jemput: tanggal_jemput,
+            waktu_jemput: waktu_jemput,
+            jenis_sampah: jenis_sampah,
+            berat_sampah: berat_sampah,
+            alamat: alamat,
+            csrfmiddlewaretoken: csrf_token
+        }, function(data){
+            $('.cardPenjemputan').empty();
+            $.get("{% url 'penjemputan:show_json' %}", function(data){
+                let dataPenjemputan = '<div class="card-group">';
+                dataPenjemputan += '<div class="row row-cols-1 row-cols-md-3 g-4">';
+                for (let i = 0; i < data.length; i++) {
+                    dataPenjemputan += '<div class="card border-info mb-5" style="width: 18rem;">'
+                    dataPenjemputan += '<div class="card-body">'
+                    dataPenjemputan += '<h5 class="card-title">' + data[i].fields.tanggal_jemput + '</h5>';
+                    dataPenjemputan += '<p class="card-text">' + data[i].fields.waktu_jemput + '</p>';
+                    dataPenjemputan += '<p class="card-text">' + data[i].fields.jenis_sampah + '</p>';
+                    dataPenjemputan += '<p class="card-text">' + data[i].fields.berat_sampah + '</p>';
+                    dataPenjemputan += '<p class="card-text"> ditambahkan pada' + data[i].fields.waktu_sekarang + '</p>';
+                    dataPenjemputan += '<p class="card-text">' + data[i].fields.alamat + '</p>';
+                    if (data[i].fields.is_finished == false) dataPenjemputan += '<p class="card-text">Status: Belum diambil</p>';
+                    else dataPenjemputan += '<p class="card-text">Status: Sudah diambil</p>';
+                    dataPenjemputan += '</div>';
+                    dataPenjemputan += '</div>';
+                }
+                dataPenjemputan += '</div>';
+                dataPenjemputan += '</div>';
+                document.getElementsByClassName("cardPenjemputan")[0].innerHTML = dataPenjemputan;
+            });
+        });
+    });
+});
+</script>
+
+<script>
+    $(document).ready(function(){
+    $.get("{% url 'penjemputan:show_json' %}", function(data){
+        let dataPenjemputan = '<div class="card-group">';
+        dataPenjemputan += '<div class="row row-cols-1 row-cols-md-3 g-4">';
+        for (let i = 0; i < data.length; i++) {
+            dataPenjemputan += '<div class="card border-info mb-5" style="width: 18rem;">'
+            dataPenjemputan += '<div class="card-body">'
+            dataPenjemputan += '<h5 class="card-title">' + data[i].fields.tanggal_jemput + '</h5>';
+            dataPenjemputan += '<p class="card-text">' + data[i].fields.waktu_jemput + '</p>';
+            dataPenjemputan += '<p class="card-text">' + data[i].fields.jenis_sampah + '</p>';
+            dataPenjemputan += '<p class="card-text">' + data[i].fields.berat_sampah + '</p>';
+            dataPenjemputan += '<p class="card-text"> ditambahkan pada' + data[i].fields.waktu_sekarang + '</p>';
+            dataPenjemputan += '<p class="card-text">' + data[i].fields.alamat + '</p>';
+            if (data[i].fields.status == false) dataPenjemputan += '<p class="card-text">Status: Belum diambil</p>';
+            else dataPenjemputan += '<p class="card-text">Status: Sudah diambil</p>';
+            dataPenjemputan += '</div>';
+            dataPenjemputan += '</div>';
+        }
+        dataPenjemputan += '</div>';
+        dataPenjemputan += '</div>';
+        document.getElementsByClassName("cardPenjemputan")[0].innerHTML = dataPenjemputan;
+    });
+});
+</script> -->
+
+
+
+{% endblock %}

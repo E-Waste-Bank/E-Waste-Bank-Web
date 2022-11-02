@@ -25,7 +25,7 @@ Aplikasi ini dapat digunakan oleh masyarakat untuk mendapatkan uang melalui menj
 
 ## 👥 Daftar Modul 👥
 Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang dari setiap modul.
-- Admin - [Riona Adani Ghaisani](https://github.com/rionadani)
+- About Us- [Riona Adani Ghaisani](https://github.com/rionadani)
 - Halaman Utama - Semua Anggota
 - Request Penjemputan - [Ibni Shaquille Syauqi Ibrahim](https://github.com/IbniShaquille)
 - Tips and Tricks - [Hayfa Najma](https://github.com/HayfaNajma07)
@@ -37,14 +37,14 @@ Berikut ini adalah daftar modul yang akan diimplementasikan beserta pengembang d
 ### 👤 Admin 👤
 Admin dapat:
 - Memiliki akses ke halaman utama dan semua modul
-- Memiliki akses untuk mengedit dan menambahkan informasi mengenai e-waste
+- Memiliki akses untuk mengedit dan menambahkan informasi mengenai E-Waste
 
 ### 🔒 User Yang Tidak Login 🔒
 User yang tidak login dapat:
-- Mengakses konten-konten halaman utama
+- Memiliki akses untuk ke halaman utama
+- Memiliki akses untuk fitur Tips and Tricks
 
 ### 🔑 User Yang Sudah Login 🔑
 User yang sudah login dapat:
 - Memiliki akses ke halaman utama.
 - Memiliki akses untuk semua fitur yang ada pada aplikasi E-Waste Bank.
-
