@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from tips_and_tricks.models import TipsAndTrick
 from tips_and_tricks.forms import AddForm
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 # Custom function to check the request type 
 def is_ajax(request):
@@ -35,14 +36,19 @@ def index(request):
     return render(request, 'tips_and_tricks/main.html', response)
 
 # Function untuk add new article tips and tricks
+@login_required(login_url="/login/")
 @csrf_exempt
 def add(request):
     form = AddForm(request.POST)
-    if form.is_valid():
-        formSave = form.save()
-        formSave.user = request.user
-        formSave.save()
-        return HttpResponse("")
+    if request.user.groups.exists():
+        groups = request.user.groups.all()
+        for group in groups:
+            if group.name == "admin":
+                if form.is_valid():
+                    formSave = form.save()
+                    formSave.user = request.user
+                    formSave.save()
+                    return HttpResponse("")
     response = {'form': form}
     return render(request, 'tips_and_tricks/add.html', response)
 
