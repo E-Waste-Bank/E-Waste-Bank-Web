@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block meta %}
-
+<title>Penarikan ({{cashout_object.pk}}) | E-Waste Bank</title>
 {% endblock meta %}
 
 {% load humanize %}
@@ -15,12 +15,13 @@
             <input type="text" name="username" readonly disabled value="{{cashout_object.user}}" id="cashout_user" placeholder="Judul Task" class="form-control">
             <label for="cashout_user" class="form-label">User Penarik</label>
         </div>
-        <div class="input-group col-lg-4 mb-3">
-            <span class="input-group-text">Rp.</span>
-            <div class="form-floating">
-                <!-- TODO fix input width whole page (harusnya sesuai col-lg-4) -->
-                <input type="text" name="amount" readonly disabled value="{{cashout_object.amount|floatformat:2|intcomma}}" id="cashout_amount" placeholder="Jumlah Penarikan" class="form-control">
-                <label for="cashout_amount" class="form-label">Jumlah Penarikan</label>
+        <div class="col-lg-4">
+            <div class="input-group mb-3" id="amount-width-inherit">
+                <span class="input-group-text">Rp.</span>
+                <div class="form-floating">
+                    <input type="text" name="amount" readonly disabled value="{{cashout_object.amount|floatformat:2|intcomma}}" id="cashout_amount" placeholder="Jumlah Penarikan" class="form-control">
+                    <label for="cashout_amount" class="form-label">Jumlah Penarikan</label>
+                </div>
             </div>
         </div>
         <div class="form-check mb-4">
