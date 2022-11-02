@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card" style="margin:50px;">
+  <div class="card-body">
+    <h4 class="card-title">{{data.name}}</h4>
+    <medium class="card-subtitle mb-2 text-muted">{{data.date}}</medium>
+    <p class="card-text">{{data.your_feedback}}</p>
+  </div>
+</div>
+{% endblock content %}

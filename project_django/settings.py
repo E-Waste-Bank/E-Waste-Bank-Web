@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'keuangan',
     'penjemputan',
     'ewaste_admin',
-    'tips_and_tricks'
+    'tips_and_tricks',
+    'about_us'
 ]
 
 MIDDLEWARE = [
