@@ -11,8 +11,7 @@ def admin_only(view_func):
 
 		if group == 'admin':
 			return view_func(request, *args, **kwargs)
-        
-		if group == None:
+		else:
 			return HttpResponseRedirect(reverse("keuangan:show_user"))
 
 	return wrapper_function

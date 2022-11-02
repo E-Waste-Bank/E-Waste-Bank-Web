@@ -124,3 +124,44 @@ class CashoutModelsTest(TestCase):
     def tearDown(self):
         self.client.logout()
         self.user.delete()
+
+class KeuanganAdminTest(TestCase):
+    def setUp(self):
+        self.admin_group = Group(name='admin')
+        self.admin_group.save()
+
+        self.admin =  get_user_model().objects.create_user(username="tes1admin", password='tes1admintes1admin', email='tes1admin@user.xyz')
+        self.admin.groups.add(self.admin_group)
+        self.admin.save()
+
+        self.user =  get_user_model().objects.create_user(username="tes2user", password='tes2usertes2user', email='tes2user@user.xyz')
+        self.user.save()
+
+        self.user2 =  get_user_model().objects.create_user(username="tes3user", password='tes3usertes3user', email='tes2user@user.xyz')
+        self.user.save()        
+
+        self.client_admin = Client()
+        self.client_admin.login(username="tes1admin", password="tes1admintes1admin")
+        
+        self.client_user = Client()
+        self.client_user.login(username="tes2user", password="tes2usertes2user")
+        
+        self.client_user2 = Client()
+        self.client_user2.login(username="tes3user", password="tes3usertes3user")
+
+    # ----------------------------------------------------
+    # Tes autorisasi page admin dan user diakses oleh masing-masing role
+    # ----------------------------------------------------
+    def test_user_access_keuanganAdmin(self):
+        response = self.client_user.get("/keuangan/admin/")
+        self.assertRedirects(response, "/keuangan/user/")
+    
+    def test_user_access_keuangan(self):
+        response = self.client_user.get("/keuangan/")
+        self.assertRedirects(response, "/keuangan/user/")
+
+    def test_admin_access_keuangan(self):
+        response = self.client_admin.get("/keuangan/")
+        self.assertRedirects(response, "/keuangan/admin/")
+    
+    
