@@ -43,7 +43,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect(reverse('home:login_user'))
+    return redirect(reverse('home:landing_page'))
 
 def register(request):
     form = UserCreationForm()
