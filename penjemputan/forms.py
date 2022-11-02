@@ -18,5 +18,6 @@ class CreatePenjemputanForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
         super(CreatePenjemputanForm, self).__init__(*args, **kwargs)
+        self.fields['berat_sampah'].widget.attrs['min'] = 0.0
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'

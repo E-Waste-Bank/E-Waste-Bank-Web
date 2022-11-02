@@ -11,7 +11,7 @@ $(document).ready(function(){
             dataPenjemputanAdmin += '<h5 class="card-title">' + data[i].fields.tanggal_jemput + '</h5>';
             dataPenjemputanAdmin += '<p class="card-text">' + data[i].fields.waktu_jemput + '</p>';
             dataPenjemputanAdmin += '<p class="card-text">' + data[i].fields.jenis_sampah + '</p>';
-            dataPenjemputanAdmin += '<p class="card-text">' + data[i].fields.berat_sampah + '</p>';
+            dataPenjemputanAdmin += '<p class="card-text">' + data[i].fields.berat_sampah + ' kg</p>';
             dataPenjemputanAdmin += '<p class="card-text"> ditambahkan pada ' + data[i].fields.waktu_sekarang + '</p>';
             dataPenjemputanAdmin += '<p class="card-text">' + data[i].fields.alamat + '</p>';
             dataPenjemputanAdmin += '<p class="card-text">Status: <span style="color:'+color+'">'+message+'</span></p>';
