@@ -10,7 +10,7 @@
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mx-auto ">
           <li class="nav-item">
-            <a class="nav-link mx-2" aria-current="page" href="/about_us">About Us</a>
+            <a class="nav-link mx-2" aria-current="" href="">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mx-2" href="/tips-and-tricks/">Tips & Tricks</a>
@@ -20,12 +20,21 @@
               <img src="https://cdn-icons-png.flaticon.com/512/1039/1039783.png" height="60" />
             </a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link mx-2" href="/penjemputan/">Penjemputan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mx-2" href="/keuangan/">Keuangan</a>
           </li>
+
+          {% if user.is_authenticated %}
+          <li style="color: #fff; padding-top: 8px;"><i class="fa fa-sign-out" aria-hidden="true"></i> Hi, {{ user.get_username }}</li>
+          <li class="scroll-to-section"><div class="border-first-button"><a href="/logout/">Logout</a></div></li> 
+          {% else %}
+          <li class="scroll-to-section"><div class="border-first-button"><a href="/login/">Login</a></div></li> 
+          {% endif %}
+
         </ul>
       </div>
     </div>
