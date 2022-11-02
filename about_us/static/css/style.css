@@ -1,0 +1,21 @@
+#latest-three-feedback{
+  margin: auto;
+  display: grid;
+  gap: 15px;
+}
+
+#about-us {
+  background-color: #F8F7F3;
+} 
+
+
+@media (max-width: 600px) {
+    #latest-three-feedback {
+      display: flex;
+      flex-direction: column;
+    }
+}
+
+textarea{
+  resize: none;
+}

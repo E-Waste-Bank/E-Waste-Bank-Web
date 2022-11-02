@@ -23,9 +23,9 @@ def show_penjemputan(request):
                 penjemputan = Penjemputan.objects.all()
                 role = 'admin'
                 break 
-        else:
-            penjemputan = Penjemputan.objects.filter(user = request.user)
-            role = 'user'
+    else:
+        penjemputan = Penjemputan.objects.filter(user = request.user)
+        role = 'user'
     context = {
         'penjemputan': penjemputan,
         'forms': createForm,

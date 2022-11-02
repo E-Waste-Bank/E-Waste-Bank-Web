@@ -8,10 +8,11 @@ from django.urls import reverse
 from django.utils.encoding import iri_to_uri
 from django.utils.http import url_has_allowed_host_and_scheme
 from keuangan.models import KeuanganAdmin
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def landing_page(request):
-    return render(request, "landing_page.html")
+    return HttpResponseRedirect(reverse("about_us:show_about_us"))
 
 def login_user(request):
     if request.method == 'POST':
