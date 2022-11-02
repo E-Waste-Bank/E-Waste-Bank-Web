@@ -18,40 +18,6 @@
   margin:20px;
 }
 
-#calendar h5{
-  font-size: 15px; 
-  font-weight: bold; 
-  margin-right: 10px; 
-  margin-top: 7px;
-  color: rgb(210, 4, 4);
-}
-
-#calendar i{
-  color: rgb(70, 67, 67);
-  padding-right: 5px;
-}
-
-#calendar h4{
-  font-size: 17px; 
-  font-weight: bolder; 
-  margin-right: 8px; 
-  margin-top: 7px;
-  color: black;
-}
-
-#source h5{
-  font-size: 15px; 
-  font-weight: bold; 
-  margin-right: 10px; 
-  margin-top: 7px;
-  color: rgb(10, 99, 50);
-}
-
-#source i{
-  color: rgb(70, 67, 67);
-  padding-right: 5px;
-}
-
 /* style hover list card article */
 #article-list:hover {
   overflow: hidden;
@@ -89,6 +55,7 @@
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
+/* Style Load More Button */
 #loadMoreBtn{
   border-radius: 40px
   width: 220px; 
@@ -106,55 +73,4 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   transform: scale(1.005);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-}
-
-#title h3{
-  font-weight: bolder;
-  color: black;
-  font-size: 36px;
-  justify-content: center
-}
-
-/* Style tanggal */
-#calendar h5{
-  font-size: 17px; 
-  font-weight: bold; 
-  margin-right: 10px; 
-  margin-top: 7px;
-  color: rgb(10, 99, 50);
-}
-
-/* Style icon calendar */
-#calendar i{
-  color: rgb(45, 43, 43);
-  padding-right: 5px;
-}
-
-/* Style "|" */
-#calendar h4{
-  font-size: 18px; 
-  font-weight: bolder; 
-  margin-right: 8px; 
-  margin-top: 7px;
-  color: black;
-}
-
-/* Style source */
-#source h5{
-  font-size: 17px; 
-  font-weight: bold; 
-  margin-right: 10px; 
-  margin-top: 7px;
-  color: rgb(10, 99, 50);
-}
-
-/* Style icon source */
-#source i{
-  color: rgb(45, 43, 43);
-  padding-right: 5px;
-}
-
-#button-readmore{
-  font-weight: bolder;
-  margin-bottom: 10px
 }

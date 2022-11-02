@@ -8,7 +8,7 @@ class DateInput(forms.DateInput):
 class AddForm(forms.ModelForm):
     class Meta:
         model = TipsAndTrick
-        fields = '__all__'
+        fields = ['title', 'source', 'published_date', 'brief_description', 'image_url', 'article_url']
         widgets = {
             'published_date': DateInput(),
         }
@@ -16,6 +16,5 @@ class AddForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control',
             field.widget.attrs['type'] = 'text'
-
