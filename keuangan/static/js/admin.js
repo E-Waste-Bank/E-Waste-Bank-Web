@@ -38,7 +38,10 @@ async function refresh_table_cashout() {
             <tr>
                 <th scope="row">${item.pk}</th>
                 <td>${item.fields.user}</td>
-                <td>${item.fields.amount}</td>
+                <td>Rp${item.fields.amount.toLocaleString('en', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}</td>
             ` 
 
             if (item.fields.approved) {
@@ -112,7 +115,10 @@ async function refresh_table_uang_user() {
             htmlString += `
             <tr>
                 <th scope="row">${item.fields.user}</th>
-                <td>${item.fields.uang_user}</td>
+                <td>Rp${item.fields.uang_user.toLocaleString('en', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}</td>
                 <td>
                 <button class="btn btn-primary text-wrap" onClick="edit_uang_user(${item.pk})"> Tambah </button>
                 </td>
