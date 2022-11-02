@@ -162,6 +162,10 @@ class KeuanganAdminTest(TestCase):
         self.client_user2 = Client()
         self.client_user2.login(username="tes3user", password="tes3usertes3user")
 
+    def tearDown(self):
+        self.client.logout()
+        self.user.delete()
+
     # ----------------------------------------------------
     # Tes autorisasi page admin dan user diakses oleh masing-masing role
     # ----------------------------------------------------
@@ -177,4 +181,32 @@ class KeuanganAdminTest(TestCase):
         response = self.client_admin.get("/keuangan/")
         self.assertRedirects(response, "/keuangan/admin/")
     
+    # ----------------------------------------------------
+    # Tes view json admin
+    # ----------------------------------------------------
+    def test_keuangan_admin_get_all_cashout_response_ok(self):
+        response = self.client_admin.get("/keuangan/json/admin-cashouts/")
+        self.assertEqual(response.status_code, 200)
     
+    def test_keuangan_admin_get_all_uang_user_response_ok(self):
+        response = self.client_admin.get("/keuangan/json/admin/")
+        self.assertEqual(response.status_code, 200)
+    
+    def test_keuangan_admin_cashout_html_response_false(self):
+        response = self.client_admin.get(f"/keuangan/edit-cashout/9999999999/")
+        self.assertNotEqual(response.status_code, 200)
+    
+    def test_keuangan_admin_uang_user_html_response_false(self):
+        response = self.client_admin.get(f"/keuangan/edit-uang-user/9999999999/")
+        self.assertNotEqual(response.status_code, 200)
+    
+class KeuanganAdminFormsTest(TestCase):
+    def test_uang_user_form_admin_success(self):
+        valid_data = {'uang_user': '123.11'}
+        form = EditUangUserForm(data = valid_data)
+        self.assertTrue(form.is_valid())
+    
+    def test_uang_user_form_admin_false(self):
+        invalid_data = {'uang_user': '#PSDisFun'}
+        form = EditUangUserForm(data = invalid_data)
+        self.assertFalse(form.is_valid())
