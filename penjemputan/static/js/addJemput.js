@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('#submitBtn').click(function(){    
+        let form = $('#formJemput')[0];
         let waktu_jemput = $('#id_waktu_jemput').val();
         let tanggal_jemput = $('#id_tanggal_jemput').val();
         let jenis_sampah = $('#id_jenis_sampah').val();
@@ -36,7 +37,8 @@ $(document).ready(function(){
                 }
                 dataPenjemputan += '</div>';
                 dataPenjemputan += '</div>';
-                document.getElementsByClassName("cardPenjemputan")[0].innerHTML = dataPenjemputan;
+                document.getElementsByClassName("cardPenjemputan")[0].innerHTML = dataPenjemputan; 
+                form.reset();
             });
         });
     });
