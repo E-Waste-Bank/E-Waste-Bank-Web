@@ -148,3 +148,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Trying to fix CSRF origin checking error
+# https://forum.djangoproject.com/t/deploy-a-django-project-on-railway-how-to-fix-the-csrf-verification-failed/16832/2
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS = ["https://e-waste-bank.up.railway.app"]
