@@ -51,9 +51,11 @@ INSTALLED_APPS = [
     'tips_and_tricks',
     'about_us',
     'authentication',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
