@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'penjemputan',
     'ewaste_admin',
     'tips_and_tricks',
-    'about_us'
+    'about_us',
+    'authentication',
 ]
 
 MIDDLEWARE = [
