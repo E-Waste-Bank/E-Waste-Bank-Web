@@ -23,4 +23,5 @@ urlpatterns = [
     path('penjemputan/', include('penjemputan.urls')),
     path('', include('home.urls')),
     path('about-us/', include('about_us.urls')),
+    path('auth/', include('authentication.urls')),
 ]
