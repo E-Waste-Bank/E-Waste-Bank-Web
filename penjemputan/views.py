@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
 from django.views.decorators.csrf import csrf_exempt
+from penjemputan.decorators import admin_only
 # Create your views here.
 
 def is_ajax(request):
@@ -34,8 +35,12 @@ def show_penjemputan(request):
     return render(request, 'penjemputan.html', context)
 
 def show_json(request):
-    if request.user.is_superuser:
-        data_penjemputan_json = Penjemputan.objects.all()
+    if request.user.groups.exists():
+        groups = request.user.groups.all()
+        for group in groups:
+            if group.name == "admin":
+                data_penjemputan_json = Penjemputan.objects.all()
+                break 
     else:
         data_penjemputan_json = Penjemputan.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize("json", data_penjemputan_json), content_type="application/json")
@@ -52,12 +57,14 @@ def add_penjemputan(request):
         return redirect('penjemputan:show_penjemputan')
 
 @csrf_exempt
+@admin_only
 def delete_penjemputan(request, id):
     penjemputan = Penjemputan.objects.get(pk=id)
     penjemputan.delete()
     return redirect('penjemputan:show_penjemputan')
 
 @csrf_exempt
+@admin_only
 def update_penjemputan(request, id):
     penjemputan = Penjemputan.objects.get(pk=id)
     if penjemputan.is_finished:
