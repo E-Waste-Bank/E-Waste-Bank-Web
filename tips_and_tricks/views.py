@@ -8,12 +8,16 @@ from tips_and_tricks.models import TipsAndTrick
 from tips_and_tricks.forms import AddForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+import json
+from django.contrib.auth import authenticate
 
 # Custom function to check the request type 
 def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 def index(request):
+    print(request.user)
     if 'q' in request.GET:
         q = request.GET['q']
         articles = TipsAndTrick.objects.filter(title__icontains=q).order_by('id')
@@ -35,6 +39,20 @@ def index(request):
     posts_obj = paginator.get_page(page_number)
     response = {'articles': posts_obj, 'all_articles': articles}
     return render(request, 'tips_and_tricks/main.html', response)
+
+def get_all_post(request):
+    data = TipsAndTrick.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+# def get_user_username(request, idUser):
+#     # print(request.user.username)
+#     temp = User.objects.get(User = User)
+#     print(temp.username)
+#     # print("id" + str(idUser))
+#     # username = User.objects.get(user = idUser)
+#     # # print(user)
+#     return HttpResponse(status=202)
+#     # return HttpResponse(serializers.serialize("json", username), content_type="application/json")
 
 # Function untuk add new article tips and tricks
 @login_required(login_url="/login/")
@@ -76,3 +94,21 @@ def search_json(request):
         articles = TipsAndTrick.objects.all().order_by('id')
     data = serializers.serialize('json', articles, use_natural_foreign_keys=True)
     return HttpResponse(data, content_type="application/json")
+
+@csrf_exempt
+def add_mobile(request):
+    body_unicode = (request.body.decode('utf-8'))
+    body = json.loads(body_unicode)
+    # print(body)
+    title = body['title']
+    source = body['source']
+    published_date = body['published_date']
+    brief_description = body['brief_description']
+    image_url = body['image_url']
+    article_url = body['article_url']
+    # print(request.user)
+    user = authenticate(username='ewasteadmin', password='ewasteadminewasteadmin')
+
+    article = TipsAndTrick(user = user, title = title, source = source, published_date = published_date, brief_description = brief_description, image_url = image_url, article_url = article_url)
+    article.save()
+    return HttpResponse(status=202)
