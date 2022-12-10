@@ -6,9 +6,9 @@
     <!-- import jquery -->
     <header>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="{% static '/js/listJemput.js' %}"></script>
-        <script type="text/javascript" src="{% static '/js/adminListJemput.js' %}"></script>
-        <script type="text/javascript" src="{% static '/js/addJemput.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/listJemput.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/adminListJemput.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/addJemput.js' %}"></script>
     </header>
 {% endblock meta %}
     
@@ -16,7 +16,7 @@
 <!-- untuk memunculkan card penjemputan dari sisi User -->
 {% if role == 'user' %}
     <div class="cardPenjemputan"></div>
-    
+
     <!-- untuk menambah card penjemputan -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Jemput Sampah
@@ -40,7 +40,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="" method="POST">
+            <form action="" method="POST" id="formJemput">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="tanggal">Tanggal Jemput</label>

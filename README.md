@@ -4,7 +4,7 @@
 > diselenggarakan oleh Fakultas Ilmu Komputer, Universitas Indonesia
 > pada Semester Gasal, Tahun Ajaran 2022/2023.
 
-![Main Deployment Status](https://github.com/E-Waste-Bank/E-Waste-Bank-Web/actions/workflows/dpl.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/github/E-Waste-Bank/E-Waste-Bank-Web/branch/main/graph/badge.svg?token=HGAMNIOP91)](https://codecov.io/github/E-Waste-Bank/E-Waste-Bank-Web)
 
 ## 👩🏻‍💻 Pengembang Aplikasi 🧑🏻‍💻
 - [Hugo Sulaiman Setiawan](https://github.com/hugo-setiawan) (2106707315)
@@ -14,7 +14,7 @@
 - [Riona Adani Ghaisani](https://github.com/rionadani) (2106750995)
 
 ## 🌏 Tautan Aplikasi Heroku 🌏
-Proyek ini dapat diakses di [e-waste-bank.herokuapp.com](https://e-waste-bank.herokuapp.com/).
+Proyek ini dapat diakses di [e-waste-bank.up.railway.app](https://e-waste-bank.up.railway.app/).
 
 ## 📃 Cerita aplikasi yang diajukan serta manfaatnya 📃
 Sampah elektronik (*e-waste*) merupakan salah satu efek samping dari Transformasi Digital yang terjadi pada masa kini. Menurut data dari [Global E-Waste Monitor](https://ewastemonitor.info/), terdapat 53 juta ton sampah elektronik yang dihasilkan oleh seluruh negara di dunia pada tahun 2020. Estimasi yang dilakukan oleh badan yang sama juga menyajikan kesimpulan bahwa laju pertumbuhan sampah elektronik akan terus berkembang, bahkan dalam waktu sekitar 8 tahun, yaitu pada tahun 2030, diperkirakan bahwa akan ada 120 juta ton sampah elektronik yang dihasilkan oleh manusia! Jika situasi ini terus berlanjut, dampaknya akan sangat besar, baik bagi manusia, flora, dan fauna. 
