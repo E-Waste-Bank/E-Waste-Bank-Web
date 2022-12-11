@@ -42,7 +42,7 @@ def index(request):
 
 def get_all_post(request):
     data = TipsAndTrick.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json", use_natural_foreign_keys=True)
+    return HttpResponse(serializers.serialize("json", data, use_natural_foreign_keys=True), content_type="application/json")
 
 # Function untuk add new article tips and tricks
 @login_required(login_url="/login/")
