@@ -45,6 +45,7 @@ def show_json(request):
         data_penjemputan_json = Penjemputan.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize("json", data_penjemputan_json), content_type="application/json")
 
+@csrf_exempt
 def add_penjemputan(request):
     if is_ajax(request) and request.method == 'POST':
         alamat = request.POST.get('alamat')
