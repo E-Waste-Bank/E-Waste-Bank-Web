@@ -21,6 +21,8 @@ class KeuanganUserViewsTest(TestCase):
         self.user_admin.groups.add(self.admin_group)
         self.user_admin.save()
 
+        self.unauthenticated_client = Client()
+
         self.client = Client()
         self.client.login(username="t3st_us3r", password='us3r_t3st')
 
@@ -57,8 +59,24 @@ class KeuanganUserViewsTest(TestCase):
         response = self.client.get("/keuangan/json/user/")
         self.assertEqual(response.status_code, 200)
 
+    def test_keuangan_user_data_json_api_response_403(self):
+        response = self.unauthenticated_client.get("/keuangan/json/user-api/")
+        self.assertEqual(response.status_code, 403)
+
+    def test_keuangan_user_data_json_api_response_ok(self):
+        response = self.client.get("/keuangan/json/user-api/")
+        self.assertEqual(response.status_code, 200)
+
     def test_keuangan_user_get_all_cashout_response_ok(self):
         response = self.client.get("/keuangan/json/user-cashouts/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_keuangan_user_get_all_cashouts_json_api_response_403(self):
+        response = self.unauthenticated_client.get("/keuangan/json/user-cashouts-api/")
+        self.assertEqual(response.status_code, 403)
+
+    def test_keuangan_user_get_all_cashouts_json_api_response_200(self):
+        response = self.client.get("/keuangan/json/user-cashouts-api/")
         self.assertEqual(response.status_code, 200)
 
     def test_keuangan_user_create_cashout_response_405(self):

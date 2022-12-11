@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from keuangan.models import KeuanganAdmin, Cashout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseNotFound
 from django.urls import reverse
 from django.core import serializers
 from .forms import *
 from .decorators import admin_only
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -114,6 +115,26 @@ def user_get_cashout_html(request: HttpRequest, id: int):
 
     # jika obj cashout dgn id tsb tdk ditemukan
     return HttpResponse(f"ID: {id} <br> Penarikan tidak ditemukan. <br> Cashout not found.", status=404)
+
+@csrf_exempt
+def user_get_keuangan_data_json_api(request: HttpRequest):
+    # handle kasus user blm logged in
+    if request.user.is_anonymous:
+        return JsonResponse({
+                "message": "Not authenticated"
+        }, status=403)
+
+    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.filter(user = request.user)), content_type="application/json")
+
+@csrf_exempt
+def user_get_all_cashouts_json_api(request: HttpRequest):
+    # handle kasus user blm logged in
+    if request.user.is_anonymous:
+        return JsonResponse({
+                "message": "Not authenticated"
+        }, status=403)
+
+    return HttpResponse(serializers.serialize("json", Cashout.objects.filter(user = request.user)), content_type="application/json")
 
 @login_required(login_url="/login/")
 @admin_only
