@@ -77,6 +77,7 @@ def update_penjemputan(request, id):
 
 @csrf_exempt
 def add_mobile(request):
+    print(request.method)
     if request.method == 'POST':
         alamat = request.POST.get('alamat')
         tanggal_jemput = request.POST.get('tanggal_jemput')
@@ -85,14 +86,4 @@ def add_mobile(request):
         berat_sampah = request.POST.get('berat_sampah')
         new_penjemputan = Penjemputan(user=request.user, alamat=alamat, tanggal_jemput=tanggal_jemput, waktu_jemput=waktu_jemput, waktu_sekarang=datetime.datetime.now(), jenis_sampah=jenis_sampah, berat_sampah=berat_sampah, is_finished=False)
         new_penjemputan.save()
-        return JsonResponse({
-            "status": True,
-            "message": "Successfully Added Comment!"
-            # Insert any extra data if you want to pass data to Flutter
-            }, status=200)
-    else:
-        return JsonResponse({
-            "status": False,
-            "message": "Failed to add comment, check your input."
-            }, status=401)
-
+        return HttpResponse(status=202)
