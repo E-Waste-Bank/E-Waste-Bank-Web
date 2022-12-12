@@ -148,10 +148,10 @@ def user_create_cashout_api(request: HttpRequest):
             jumlah_uang_ditarik = form.cleaned_data['amount']
 
             if jumlah_uang_ditarik <= 0:
-                return JsonResponse({"status": "Invalid amount"}, status=400)
+                return JsonResponse({"status": False, "message": "Invalid amount"}, status=400)
 
             if jumlah_uang_user < jumlah_uang_ditarik:
-                return JsonResponse({"status": "Not enough funds"}, status=400)
+                return JsonResponse({"status": False, "message": "Not enough funds"}, status=400)
 
             new_cashout = Cashout.objects.create(
                 user = request.user,
@@ -164,15 +164,15 @@ def user_create_cashout_api(request: HttpRequest):
             uang_model_user.uang_user -= jumlah_uang_ditarik
             uang_model_user.save()
 
-            return HttpResponse(serializers.serialize("json", [new_cashout]), content_type="application/json")
+            return JsonResponse({"status": True, "message": f"Saved with id {new_cashout.pk}"}, status=200)
     
         else:
             # input tdk sesuai validasi pada forms.py
-            return JsonResponse({"status": "Invalid input"}, status=400)
+            return JsonResponse({"status": False, "message": "Invalid input"}, status=400)
             
     else:
         # hanya boleh POST ke endpoint ini
-        response = JsonResponse({"status": "Invalid method"}, status=405)
+        response = JsonResponse({"status": False, "message": "Invalid method"}, status=405)
 
         # Allow header as per HTTP spec https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
         response['Allow'] = 'POST'
