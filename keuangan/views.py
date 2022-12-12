@@ -38,11 +38,9 @@ def show_user(request: HttpRequest):
     }
     return render(request, "user.html", context)
 
-@login_required(login_url="/login/")
 def user_get_keuangan_data_json(request: HttpRequest):
     return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.filter(user = request.user)), content_type="application/json")
 
-@login_required(login_url="/login/")
 def user_get_all_cashouts_json(request: HttpRequest): # TODO test
     return HttpResponse(serializers.serialize("json", Cashout.objects.filter(user = request.user)), content_type="application/json")
 
@@ -219,3 +217,30 @@ def admin_edit_uang_user(request: HttpRequest, id: int):
             user.save()
         
     return redirect('keuangan:show_admin')
+
+@csrf_exempt
+def admin_edit_cashout_api(request: HttpRequest, id: int):
+    if request.method == "POST":
+        form = EditCashoutForm(request.POST)
+
+        if form.is_valid():
+            cashout_object = Cashout.objects.get(pk = id)
+            cashout_object.approved = form.cleaned_data['approved']
+            cashout_object.save()
+            return JsonResponse({"status": True})
+    
+    return JsonResponse({"status": False})
+
+@csrf_exempt
+def admin_edit_uang_user_api(request: HttpRequest, id: int):
+    if request.method == "POST":
+        form = EditUangUserForm(request.POST)
+
+        if form.is_valid():
+            user = KeuanganAdmin.objects.get(pk = id)
+            uang_tambahan = form.cleaned_data['uang_user']
+            user.uang_user += uang_tambahan
+            user.save()
+            return JsonResponse({"status": True})
+        
+    return JsonResponse({"status": False})
