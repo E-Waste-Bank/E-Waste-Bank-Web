@@ -35,21 +35,10 @@ def show_feedback_by_id(request, id):
     return render(request, 'show_feedback.html', context)
 
 @csrf_exempt
-def add_feedback_flutter():
-    try:
+def add_feedback_flutter(request):
+    if request.method == 'POST':
         name = request.POST.get('name')
         your_feedback = request.POST.get('your_feedback')
-        new_feedback = Feedback(
-            date = datetime.datetime().now(),
-            name = name,
-            your_feedback = your_feedback, 
-        )
+        new_feedback = Feedback(name=name, your_feedback=your_feedback, date=datetime.datetime().now())
         new_feedback.save()
-        response_data = {
-            'date' : datetime.datetime.now(),
-            'name' : request.POST.get('name'),
-            'your_feedback' : request.POST.get('your_feedback')
-        }
-        return JsonResponse(response_data)
-    except:
-        return JsonResponse({"message": "Failed!"})
+        return HttpResponse(status=202)
