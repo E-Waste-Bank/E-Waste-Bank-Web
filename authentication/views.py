@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.http import HttpRequest, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -41,3 +41,11 @@ def login(request: HttpRequest):
             "status": False,
             "message": "Failed to login, check your email/password."
         }, status=401)
+
+@csrf_exempt
+def logout(request: HttpRequest):
+    auth_logout(request)
+    
+    return JsonResponse({
+        "status": True,
+    }, status=200)

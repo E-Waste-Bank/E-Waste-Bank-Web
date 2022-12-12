@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from keuangan.models import KeuanganAdmin, Cashout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseNotFound
 from django.urls import reverse
 from django.core import serializers
 from .forms import *
 from .decorators import admin_only
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -112,6 +113,73 @@ def user_get_cashout_html(request: HttpRequest, id: int):
 
     # jika obj cashout dgn id tsb tdk ditemukan
     return HttpResponse(f"ID: {id} <br> Penarikan tidak ditemukan. <br> Cashout not found.", status=404)
+
+@csrf_exempt
+def user_get_keuangan_data_json_api(request: HttpRequest):
+    # handle kasus user blm logged in
+    if request.user.is_anonymous:
+        return JsonResponse({
+                "message": "Not authenticated"
+        }, status=403)
+
+    return HttpResponse(serializers.serialize("json", KeuanganAdmin.objects.filter(user = request.user)), content_type="application/json")
+
+@csrf_exempt
+def user_get_all_cashouts_json_api(request: HttpRequest):
+    # handle kasus user blm logged in
+    if request.user.is_anonymous:
+        return JsonResponse({
+                "message": "Not authenticated"
+        }, status=403)
+
+    return HttpResponse(serializers.serialize("json", Cashout.objects.filter(user = request.user)), content_type="application/json")
+
+@csrf_exempt
+def user_create_cashout_api(request: HttpRequest):
+    # literally cmn perlu {amount: some_value} di POST URL-encoded nya
+    if request.method == "POST":
+        form = CreateCashoutForm(request.POST)
+        if form.is_valid():
+            # validasi kecukupan uang
+            uang_model_user = KeuanganAdmin.objects.get(user = request.user)
+            jumlah_uang_user = uang_model_user.uang_user
+            jumlah_uang_ditarik = form.cleaned_data['amount']
+
+            if jumlah_uang_ditarik <= 0:
+                return JsonResponse({"status": False, "message": "Invalid amount"}, status=400)
+
+            if jumlah_uang_user < jumlah_uang_ditarik:
+                return JsonResponse({"status": False, "message": "Not enough funds"}, status=400)
+
+            new_cashout = Cashout.objects.create(
+                user = request.user,
+                uang_model = uang_model_user,
+                amount = jumlah_uang_ditarik,
+            )
+
+            new_cashout.save()
+
+            uang_model_user.uang_user -= jumlah_uang_ditarik
+            uang_model_user.save()
+
+            return JsonResponse({
+                "status": True, 
+                "id": new_cashout.pk, 
+                "nominal": new_cashout.amount, 
+                "message": f"Saved with id {new_cashout.pk}"
+            }, status=200)
+    
+        else:
+            # input tdk sesuai validasi pada forms.py
+            return JsonResponse({"status": False, "message": "Invalid input"}, status=400)
+            
+    else:
+        # hanya boleh POST ke endpoint ini
+        response = JsonResponse({"status": False, "message": "Invalid method"}, status=405)
+
+        # Allow header as per HTTP spec https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405
+        response['Allow'] = 'POST'
+        return response
 
 @login_required(login_url="/login/")
 @admin_only
