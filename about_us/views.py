@@ -3,7 +3,8 @@ from .forms import *
 from django.http import HttpResponse
 from .models import *
 from django.core import serializers
-
+from django.views.decorators.csrf import csrf_exempt
+import datetime
 
 # Create your views here.
 def show_about_us(request):
@@ -32,3 +33,23 @@ def show_feedback_by_id(request, id):
     }
     
     return render(request, 'show_feedback.html', context)
+
+@csrf_exempt
+def add_feedback_flutter():
+    try:
+        name = request.POST.get('name')
+        your_feedback = request.POST.get('your_feedback')
+        new_feedback = Feedback(
+            date = datetime.datetime().now(),
+            name = name,
+            your_feedback = your_feedback, 
+        )
+        new_feedback.save()
+        response_data = {
+            'date' : datetime.datetime.now(),
+            'name' : request.POST.get('name'),
+            'your_feedback' : request.POST.get('your_feedback')
+        }
+        return JsonResponse(response_data)
+    except:
+        return JsonResponse({"message": "Failed!"})
