@@ -41,4 +41,12 @@ def add_feedback_flutter(request):
         your_feedback = request.POST.get('your_feedback')
         new_feedback = Feedback(name=name, your_feedback=your_feedback, date=datetime.datetime().now())
         new_feedback.save()
-        return HttpResponse(status=202)
+        return JsonResponse({
+            "status": True,
+            "message": "Successfully Added Comment!"
+            }, status=200)
+    else:
+        return JsonResponse({
+            "status": False,
+            "message": "Failed to add, check your input."
+            }, status=401)
