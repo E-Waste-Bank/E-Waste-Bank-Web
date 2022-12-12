@@ -75,3 +75,15 @@ def update_penjemputan(request, id):
     penjemputan.save()
     return redirect('penjemputan:show_penjemputan')
 
+@csrf_exempt
+def add_mobile(request):
+    print(request.method)
+    if request.method == 'POST':
+        alamat = request.POST.get('alamat')
+        tanggal_jemput = request.POST.get('tanggal_jemput')
+        waktu_jemput = request.POST.get('waktu_jemput')
+        jenis_sampah = request.POST.get('jenis_sampah')
+        berat_sampah = request.POST.get('berat_sampah')
+        new_penjemputan = Penjemputan(user=request.user, alamat=alamat, tanggal_jemput=tanggal_jemput, waktu_jemput=waktu_jemput, waktu_sekarang=datetime.datetime.now(), jenis_sampah=jenis_sampah, berat_sampah=berat_sampah, is_finished=False)
+        new_penjemputan.save()
+        return HttpResponse(status=202)
