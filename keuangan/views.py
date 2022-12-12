@@ -164,7 +164,12 @@ def user_create_cashout_api(request: HttpRequest):
             uang_model_user.uang_user -= jumlah_uang_ditarik
             uang_model_user.save()
 
-            return JsonResponse({"status": True, "message": f"Saved with id {new_cashout.pk}"}, status=200)
+            return JsonResponse({
+                "status": True, 
+                "id": new_cashout.pk, 
+                "nominal": new_cashout.amount, 
+                "message": f"Saved with id {new_cashout.pk}"
+            }, status=200)
     
         else:
             # input tdk sesuai validasi pada forms.py
