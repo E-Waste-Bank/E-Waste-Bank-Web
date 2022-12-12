@@ -42,17 +42,7 @@ def index(request):
 
 def get_all_post(request):
     data = TipsAndTrick.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
-# def get_user_username(request, idUser):
-#     # print(request.user.username)
-#     temp = User.objects.get(User = User)
-#     print(temp.username)
-#     # print("id" + str(idUser))
-#     # username = User.objects.get(user = idUser)
-#     # # print(user)
-#     return HttpResponse(status=202)
-#     # return HttpResponse(serializers.serialize("json", username), content_type="application/json")
+    return HttpResponse(serializers.serialize("json", data, use_natural_foreign_keys=True), content_type="application/json")
 
 # Function untuk add new article tips and tricks
 @login_required(login_url="/login/")
@@ -99,14 +89,14 @@ def search_json(request):
 def add_mobile(request):
     body_unicode = (request.body.decode('utf-8'))
     body = json.loads(body_unicode)
-    # print(body)
+
     title = body['title']
     source = body['source']
     published_date = body['published_date']
     brief_description = body['brief_description']
     image_url = body['image_url']
     article_url = body['article_url']
-    # print(request.user)
+
     user = authenticate(username='ewasteadmin', password='ewasteadminewasteadmin')
 
     article = TipsAndTrick(user = user, title = title, source = source, published_date = published_date, brief_description = brief_description, image_url = image_url, article_url = article_url)
