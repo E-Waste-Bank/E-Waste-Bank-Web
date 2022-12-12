@@ -86,4 +86,6 @@ def add_mobile(request):
         berat_sampah = request.POST.get('berat_sampah')
         new_penjemputan = Penjemputan(user=request.user, alamat=alamat, tanggal_jemput=tanggal_jemput, waktu_jemput=waktu_jemput, waktu_sekarang=datetime.datetime.now(), jenis_sampah=jenis_sampah, berat_sampah=berat_sampah, is_finished=False)
         new_penjemputan.save()
-        return HttpResponse(status=202)
+        return JsonResponse({'status': True, 'message': 'Penjemputan berhasil ditambahkan'})
+    else:
+        return JsonResponse({'status': False, 'message': 'Penjemputan gagal ditambahkan'})
